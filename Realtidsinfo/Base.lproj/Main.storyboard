@@ -57,7 +57,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.26701211929321289" green="0.86232173442840576" blue="0.36858454346656799" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="busLabel" destination="zjW-R3-z4R" id="5KX-3d-WNe"/>

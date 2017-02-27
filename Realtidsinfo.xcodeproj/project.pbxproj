@@ -10,6 +10,7 @@
 		11EB7D2858F42969B5121050 /* libPods-RealtidsinfoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88DD7DEFEE8489E7464746D6 /* libPods-RealtidsinfoTests.a */; };
 		8E5311B4BA04EF1B3188403C /* libPods-Realtidsinfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E73218B4BDAA647A736F907 /* libPods-Realtidsinfo.a */; };
 		AB5FBA6E1E643AE1009ACA2F /* API-keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB5FBA6D1E643AE1009ACA2F /* API-keys.plist */; };
+		AB5FBA711E647A7E009ACA2F /* RealtimeSite.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5FBA701E647A7E009ACA2F /* RealtimeSite.m */; };
 		AB9B5C411E60C0B700BC51AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C401E60C0B700BC51AE /* main.m */; };
 		AB9B5C441E60C0B700BC51AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C431E60C0B700BC51AE /* AppDelegate.m */; };
 		AB9B5C471E60C0B800BC51AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C461E60C0B800BC51AE /* ViewController.m */; };
@@ -48,6 +49,8 @@
 		961BF612135B2DF82AD25720 /* Pods-RealtidsinfoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtidsinfoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealtidsinfoTests/Pods-RealtidsinfoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E355D4C8B35543C45D803E3 /* Pods-Realtidsinfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Realtidsinfo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Realtidsinfo/Pods-Realtidsinfo.release.xcconfig"; sourceTree = "<group>"; };
 		AB5FBA6D1E643AE1009ACA2F /* API-keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "API-keys.plist"; sourceTree = "<group>"; };
+		AB5FBA6F1E647A7E009ACA2F /* RealtimeSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RealtimeSite.h; path = Model/RealtimeSite.h; sourceTree = "<group>"; };
+		AB5FBA701E647A7E009ACA2F /* RealtimeSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RealtimeSite.m; path = Model/RealtimeSite.m; sourceTree = "<group>"; };
 		AB9B5C3C1E60C0B700BC51AE /* Realtidsinfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Realtidsinfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9B5C401E60C0B700BC51AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AB9B5C421E60C0B700BC51AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -118,6 +121,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AB5FBA721E647A83009ACA2F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AB5FBA6D1E643AE1009ACA2F /* API-keys.plist */,
+				AB5FBA6F1E647A7E009ACA2F /* RealtimeSite.h */,
+				AB5FBA701E647A7E009ACA2F /* RealtimeSite.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		AB9B5C331E60C0B700BC51AE = {
 			isa = PBXGroup;
 			children = (
@@ -143,14 +156,12 @@
 		AB9B5C3E1E60C0B700BC51AE /* Realtidsinfo */ = {
 			isa = PBXGroup;
 			children = (
-				AB9B5C421E60C0B700BC51AE /* AppDelegate.h */,
-				AB9B5C431E60C0B700BC51AE /* AppDelegate.m */,
 				AB9B5C451E60C0B800BC51AE /* ViewController.h */,
 				AB9B5C461E60C0B800BC51AE /* ViewController.m */,
-				AB5FBA6D1E643AE1009ACA2F /* API-keys.plist */,
+				AB5FBA721E647A83009ACA2F /* Model */,
 				AB9B5C481E60C0B800BC51AE /* Main.storyboard */,
-				AB9B5C4B1E60C0B800BC51AE /* Assets.xcassets */,
 				AB9B5C4D1E60C0B800BC51AE /* LaunchScreen.storyboard */,
+				AB9B5C4B1E60C0B800BC51AE /* Assets.xcassets */,
 				AB9B5C501E60C0B800BC51AE /* Info.plist */,
 				AB9B5C3F1E60C0B700BC51AE /* Supporting Files */,
 			);
@@ -160,6 +171,8 @@
 		AB9B5C3F1E60C0B700BC51AE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AB9B5C421E60C0B700BC51AE /* AppDelegate.h */,
+				AB9B5C431E60C0B700BC51AE /* AppDelegate.m */,
 				AB9B5C401E60C0B700BC51AE /* main.m */,
 			);
 			name = "Supporting Files";
@@ -468,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB9B5C471E60C0B800BC51AE /* ViewController.m in Sources */,
+				AB5FBA711E647A7E009ACA2F /* RealtimeSite.m in Sources */,
 				AB9B5C441E60C0B700BC51AE /* AppDelegate.m in Sources */,
 				AB9B5C411E60C0B700BC51AE /* main.m in Sources */,
 			);
