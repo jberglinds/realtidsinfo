@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- API keys beings used when fetching data, from trafiklab.se -->
+	<key>realtimedeparturesV4</key>
+	<string>API key from Trafiklab here</string>
+	<key>typeahead</key>
+	<string>API key from Trafiklab here</string>
+</dict>
+</plist>
