@@ -27,7 +27,7 @@ NSString const *LOCATION = @"Riksten";
 NSString const *LOOKUP_API_KEY;
 NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
 
-#pragma mark - Initialization
+#pragma mark - UIViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -35,7 +35,26 @@ NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
     [self setup];
 }
 
+//TODO: Not sure if removing timers when disappearing is needed.
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.site stopUpdates];
+    [self.UIUpdateTimer invalidate];
+    self.UIUpdateTimer = nil;
+    [super viewWillDisappear:animated];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self.site startUpdates];
+    self.UIUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
+    [super viewWillAppear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Initialization
 - (void)setAPIKey {
     NSDictionary *keys = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"API-keys" ofType:@"plist"]];
     LOOKUP_API_KEY = keys[@"typeahead"];
@@ -51,8 +70,6 @@ NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
         NSInteger siteID = [firstHit[@"SiteId"] integerValue];
         self.site = [[RealtimeSite alloc] initWithSiteID:siteID];
         [self.site startUpdates];
-        
-        self.UIUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         //TODO: Deal with error in a better way
         NSLog(@"ViewController setup(): %@", error);
@@ -110,11 +127,5 @@ NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
 - (int)getSecondsFromInterval:(NSTimeInterval)interval {
     return (int)interval%60;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end
