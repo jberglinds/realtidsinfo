@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic, readwrite) NSString *locationName;
 @property (strong, nonatomic, readwrite) NSString *busName;
+@property (strong, nonatomic, readwrite) NSString *busDestination;
 @property (strong, nonatomic, readwrite) NSDate *expectedAt;
 @property (strong, nonatomic, readwrite) NSDate *updatedAt;
 
@@ -23,7 +24,7 @@
 
 NSString const *REALTIME_API_KEY;
 NSString const *API_ENDPOINT = @"http://api.sl.se/api2/realtimedeparturesV4.json";
-CGFloat const UPDATE_FREQ = 10.0;
+CGFloat const UPDATE_FREQ = 15.0;
 
 @implementation RealtimeSite
 
@@ -83,6 +84,7 @@ CGFloat const UPDATE_FREQ = 10.0;
                 if ([bus[@"JourneyDirection"] isEqual: @2]) {
                     self.locationName = bus[@"StopAreaName"];
                     self.busName = bus[@"LineNumber"];
+                    self.busDestination = bus[@"Destination"];
                     self.expectedAt = [self.dateFormatter dateFromString:bus[@"ExpectedDateTime"]];
                     return;
                 }

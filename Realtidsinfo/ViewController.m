@@ -12,8 +12,7 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *minutesCountdownLabel;
-@property (weak, nonatomic) IBOutlet UILabel *secondsCountDownLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @property (weak, nonatomic) IBOutlet UILabel *busLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
 
@@ -33,6 +32,12 @@ NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
     // Do any additional setup after loading the view, typically from a nib.
     
     [self setup];
+    self.countdownLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.countdownLabel.layer.borderWidth = 10;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 //TODO: Not sure if removing timers when disappearing is needed.
@@ -83,14 +88,12 @@ NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
     
     double timeLeft = [self.site.expectedAt timeIntervalSinceNow];
     if (timeLeft > 0) {
-        self.minutesCountdownLabel.text = [NSString stringWithFormat:@"%d min", [self getMinutesFromInterval:timeLeft]];
-        self.secondsCountDownLabel.text = [NSString stringWithFormat:@"%d sek", [self getSecondsFromInterval:timeLeft]];
+        self.countdownLabel.text = [NSString stringWithFormat:@"%d minuter och %d sekunder", [self getMinutesFromInterval:timeLeft], [self getSecondsFromInterval:timeLeft]];
     } else {
-        self.minutesCountdownLabel.text = @"Nu";
-        self.secondsCountDownLabel.text = @"";
+        self.countdownLabel.text = @"Nu";
     }
     
-    self.busLabel.text = self.site.busName;
+    self.busLabel.text = [NSString stringWithFormat:@"%@ mot %@", self.site.busName, self.site.busDestination];
     self.lastUpdatedLabel.text = [NSString stringWithFormat:@"Uppdaterad för %d sekunder sedan", (int)-[self.site.updatedAt timeIntervalSinceNow]];
     
     [self updateBackgroundToTimeLeft:timeLeft];

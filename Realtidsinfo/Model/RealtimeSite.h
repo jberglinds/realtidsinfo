@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic, readonly) NSString *locationName;
 @property (strong, nonatomic, readonly) NSString *busName;
+@property (strong, nonatomic, readonly) NSString *busDestination;
 @property (strong, nonatomic, readonly) NSDate *expectedAt;
 @property (strong, nonatomic, readonly) NSDate *updatedAt;
 

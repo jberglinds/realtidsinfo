@@ -19,6 +19,8 @@
 		AB9B5C4F1E60C0B800BC51AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9B5C4D1E60C0B800BC51AE /* LaunchScreen.storyboard */; };
 		AB9B5C5A1E60C0B800BC51AE /* RealtidsinfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C591E60C0B800BC51AE /* RealtidsinfoTests.m */; };
 		AB9B5C651E60C0B800BC51AE /* RealtidsinfoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C641E60C0B800BC51AE /* RealtidsinfoUITests.m */; };
+		ABBDD3FA1E66F4370077B07C /* SanFranciscoDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF771E66F1BF00E297AF /* SanFranciscoDisplay-Medium.otf */; };
+		ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */; };
 		B2A33C096D774D41927ABA0A /* libPods-RealtidsinfoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6F694AD004BDEE85784314 /* libPods-RealtidsinfoUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,9 @@
 		93A5EC584C92115943BA1092 /* Pods-RealtidsinfoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtidsinfoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealtidsinfoTests/Pods-RealtidsinfoTests.release.xcconfig"; sourceTree = "<group>"; };
 		961BF612135B2DF82AD25720 /* Pods-RealtidsinfoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtidsinfoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealtidsinfoTests/Pods-RealtidsinfoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9E355D4C8B35543C45D803E3 /* Pods-Realtidsinfo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Realtidsinfo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Realtidsinfo/Pods-Realtidsinfo.release.xcconfig"; sourceTree = "<group>"; };
+		AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SanFranciscoDisplay-Light.otf"; path = "../../../Library/Fonts/SanFranciscoDisplay-Light.otf"; sourceTree = "<group>"; };
+		AB4EEF771E66F1BF00E297AF /* SanFranciscoDisplay-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SanFranciscoDisplay-Medium.otf"; path = "../../../Library/Fonts/SanFranciscoDisplay-Medium.otf"; sourceTree = "<group>"; };
+		AB4EEF781E66F1BF00E297AF /* SanFranciscoDisplay-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SanFranciscoDisplay-Regular.otf"; path = "../../../Library/Fonts/SanFranciscoDisplay-Regular.otf"; sourceTree = "<group>"; };
 		AB5FBA6D1E643AE1009ACA2F /* API-keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "API-keys.plist"; sourceTree = "<group>"; };
 		AB5FBA6F1E647A7E009ACA2F /* RealtimeSite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RealtimeSite.h; path = Model/RealtimeSite.h; sourceTree = "<group>"; };
 		AB5FBA701E647A7E009ACA2F /* RealtimeSite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RealtimeSite.m; path = Model/RealtimeSite.m; sourceTree = "<group>"; };
@@ -171,6 +176,9 @@
 		AB9B5C3F1E60C0B700BC51AE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */,
+				AB4EEF771E66F1BF00E297AF /* SanFranciscoDisplay-Medium.otf */,
+				AB4EEF781E66F1BF00E297AF /* SanFranciscoDisplay-Regular.otf */,
 				AB9B5C421E60C0B700BC51AE /* AppDelegate.h */,
 				AB9B5C431E60C0B700BC51AE /* AppDelegate.m */,
 				AB9B5C401E60C0B700BC51AE /* main.m */,
@@ -314,6 +322,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */,
+				ABBDD3FA1E66F4370077B07C /* SanFranciscoDisplay-Medium.otf in Resources */,
 				AB9B5C4F1E60C0B800BC51AE /* LaunchScreen.storyboard in Resources */,
 				AB9B5C4C1E60C0B800BC51AE /* Assets.xcassets in Resources */,
 				AB9B5C4A1E60C0B800BC51AE /* Main.storyboard in Resources */,
