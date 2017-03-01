@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -29,52 +30,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Uppdaterad för 17 sekunder sedan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zpe-Hd-MXP">
-                                <rect key="frame" x="97" y="455" width="830" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0tk-OR-MNv">
+                                <rect key="frame" x="272" y="84" width="480" height="179.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BusIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4Wz-Kx-Xnk">
+                                        <rect key="frame" x="215" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="D1I-jK-rhe"/>
+                                            <constraint firstAttribute="width" constant="50" id="To7-AD-2MI"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Riksten" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiR-c5-8vc">
+                                        <rect key="frame" x="135" y="50" width="210" height="76.5"/>
+                                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="64"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="721X mot Tullinge station" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjW-R3-z4R">
+                                        <rect key="frame" x="0.0" y="126.5" width="480" height="53"/>
+                                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="44"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXe-Gg-DIR">
+                                <rect key="frame" x="80" y="318.5" width="864" height="131.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 minuter och 42 sekunder " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv1-u6-Krm">
+                                        <rect key="frame" x="10" y="25" width="843.5" height="76.5"/>
+                                        <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="64"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Vv1-u6-Krm" secondAttribute="trailing" constant="10" id="6q9-Gg-0ZP"/>
+                                    <constraint firstItem="Vv1-u6-Krm" firstAttribute="leading" secondItem="iXe-Gg-DIR" secondAttribute="leading" constant="10" id="7L0-AP-pCR"/>
+                                    <constraint firstAttribute="bottom" secondItem="Vv1-u6-Krm" secondAttribute="bottom" constant="30" id="DEa-hY-08Q"/>
+                                    <constraint firstItem="Vv1-u6-Krm" firstAttribute="top" secondItem="iXe-Gg-DIR" secondAttribute="top" constant="25" id="pY0-6C-hkg"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uppdaterad för 17 sekunder sedan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zpe-Hd-MXP">
+                                <rect key="frame" x="339" y="470" width="347" height="29"/>
                                 <fontDescription key="fontDescription" name="SanFranciscoDisplay-Light" family="San Francisco Display" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5 minuter och 42 sekunder " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv1-u6-Krm">
-                                <rect key="frame" x="97" y="322" width="830" height="125"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="64"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="721X mot Tullinge station" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjW-R3-z4R">
-                                <rect key="frame" x="20" y="218" width="984" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="44"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Riksten" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiR-c5-8vc">
-                                <rect key="frame" x="20" y="142" width="984" height="77"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="64"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BusIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4Wz-Kx-Xnk">
-                                <rect key="frame" x="487" y="84" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Zpe-Hd-MXP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2bO-vl-0Tz"/>
+                            <constraint firstItem="Zpe-Hd-MXP" firstAttribute="top" secondItem="iXe-Gg-DIR" secondAttribute="bottom" constant="20" id="3mE-ih-YFt"/>
+                            <constraint firstItem="0tk-OR-MNv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="64" id="42U-gA-Y09"/>
+                            <constraint firstItem="iXe-Gg-DIR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="60" id="4KI-b0-8ae"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iXe-Gg-DIR" secondAttribute="trailing" constant="60" id="ZCK-x2-add"/>
+                            <constraint firstItem="iXe-Gg-DIR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="q69-au-yhT"/>
+                            <constraint firstItem="0tk-OR-MNv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tVa-zs-gWV"/>
+                        </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="busLabel" destination="zjW-R3-z4R" id="5KX-3d-WNe"/>
                         <outlet property="countdownLabel" destination="Vv1-u6-Krm" id="pEU-RA-dPj"/>
+                        <outlet property="countdownView" destination="iXe-Gg-DIR" id="OPX-3G-Qvb"/>
                         <outlet property="lastUpdatedLabel" destination="Zpe-Hd-MXP" id="QfU-4u-Dob"/>
                         <outlet property="locationLabel" destination="aiR-c5-8vc" id="ppv-ea-oB2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.6953125" y="138.28125"/>
+            <point key="canvasLocation" x="165.8203125" y="154.6875"/>
         </scene>
     </scenes>
     <resources>

@@ -13,6 +13,7 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
+@property (weak, nonatomic) IBOutlet UIView *countdownView;
 @property (weak, nonatomic) IBOutlet UILabel *busLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
 
@@ -32,8 +33,8 @@ NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
     // Do any additional setup after loading the view, typically from a nib.
     
     [self setup];
-    self.countdownLabel.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.countdownLabel.layer.borderWidth = 10;
+    self.countdownView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.countdownView.layer.borderWidth = 10;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
