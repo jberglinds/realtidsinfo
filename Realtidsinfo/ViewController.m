@@ -2,57 +2,43 @@
 //  ViewController.m
 //  Realtidsinfo
 //
-//  Created by Jonathan Berglind on 2017-02-24.
+//  Created by Jonathan Berglind on 2017-03-04.
 //  Copyright © 2017 Jonathan Berglind. All rights reserved.
 //
 
 #import "ViewController.h"
-#import "RealtimeSite.h"
-#import "AFNetworking.h"
+#import "RealtimeStopViewController.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
-@property (weak, nonatomic) IBOutlet UIView *countdownView;
-@property (weak, nonatomic) IBOutlet UILabel *busLabel;
-@property (weak, nonatomic) IBOutlet UILabel *lastUpdatedLabel;
-
-@property (strong, nonatomic) RealtimeSite *site;
-@property (strong, nonatomic) NSTimer *UIUpdateTimer;
+@property (strong, nonatomic) UIPageViewController *pageViewController;
+@property (strong, nonatomic) NSMutableArray *stopViewControllers; // of RealtimeStopViewController
 @end
 
 @implementation ViewController
 
-NSString const *LOCATION = @"Riksten";
-NSString const *LOOKUP_API_KEY;
-NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
-
-#pragma mark - UIViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view.
     
-    [self setup];
-    self.countdownView.layer.borderColor = [UIColor whiteColor].CGColor;
-    self.countdownView.layer.borderWidth = 10;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
-
-//TODO: Not sure if removing timers when disappearing is needed.
-- (void)viewWillDisappear:(BOOL)animated {
-    [self.site stopUpdates];
-    [self.UIUpdateTimer invalidate];
-    self.UIUpdateTimer = nil;
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [self.site startUpdates];
-    self.UIUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
-    [super viewWillAppear:animated];
+    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimePageViewController"];
+    self.pageViewController.dataSource = self;
+    self.pageViewController.delegate = self;
+    
+    RealtimeStopViewController *test1 = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
+    test1.locationName = @"Riksten";
+    [self.stopViewControllers addObject:test1];
+    
+    RealtimeStopViewController *test2 = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
+    test2.locationName = @"Huddinge";
+    [self.stopViewControllers addObject:test2];
+    
+    [self.pageViewController setViewControllers:@[test1] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    
+    self.pageViewController.view.frame = self.view.frame;
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,76 +46,54 @@ NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Initialization
-- (void)setAPIKey {
-    NSDictionary *keys = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"API-keys" ofType:@"plist"]];
-    LOOKUP_API_KEY = keys[@"typeahead"];
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+- (NSMutableArray *)stopViewControllers {
+    if (!_stopViewControllers) _stopViewControllers = [[NSMutableArray alloc] init];
+    return _stopViewControllers;
 }
 
-- (void)setup {
-    [self setAPIKey];
-    NSString *urlString = [LOOKUP_API_ENDPOINT stringByAppendingString:[NSString stringWithFormat:@"?key=%@&searchstring=%@",
-                                                                        LOOKUP_API_KEY, LOCATION]];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *firstHit = responseObject[@"ResponseData"][0];
-        NSInteger siteID = [firstHit[@"SiteId"] integerValue];
-        self.site = [[RealtimeSite alloc] initWithSiteID:siteID];
-        [self.site startUpdates];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        //TODO: Deal with error in a better way
-        NSLog(@"ViewController setup(): %@", error);
-    }];
-    
+#pragma mark - UIPageViewController
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
 }
 
-#pragma mark - UI Updates
-- (void)updateUI {
-    self.locationLabel.text = self.site.locationName;
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
+    int index = [self.stopViewControllers indexOfObject:viewController];
     
-    double timeLeft = [self.site.expectedAt timeIntervalSinceNow];
-    if (timeLeft > 0) {
-        self.countdownLabel.text = [NSString stringWithFormat:@"%d minuter och %d sekunder", [self getMinutesFromInterval:timeLeft], [self getSecondsFromInterval:timeLeft]];
+    if ((index == 0) || (index == NSNotFound)) {
+        return nil;
     } else {
-        self.countdownLabel.text = @"Nu";
+        index--;
+        return self.stopViewControllers[index];
     }
-    
-    self.busLabel.text = [NSString stringWithFormat:@"%@ mot %@", self.site.busName, self.site.busDestination];
-    self.lastUpdatedLabel.text = [NSString stringWithFormat:@"Uppdaterad för %d sekunder sedan", (int)-[self.site.updatedAt timeIntervalSinceNow]];
-    
-    [self updateBackgroundToTimeLeft:timeLeft];
 }
 
-- (void)updateBackgroundToTimeLeft:(NSTimeInterval)timeLeft {
-    [UIView animateWithDuration:0.9f animations:^{
-        int minutesLeft = [self getMinutesFromInterval:timeLeft];
-        int secondsLeft = [self getSecondsFromInterval:timeLeft];
-        if (minutesLeft <= 0) {
-            // Pulsate
-            if ((secondsLeft % 2) == 0) {
-                self.view.backgroundColor = [UIColor colorWithRed:1.0 green:0.0145 blue:0.0 alpha:1.0];
-            } else {
-                self.view.backgroundColor = [UIColor blackColor];
-            }
-        } else if (minutesLeft <=2) {
-            self.view.backgroundColor = [UIColor colorWithRed:1.0 green:0.0145 blue:0.0 alpha:1.0];
-        } else if (minutesLeft <= 5) {
-            self.view.backgroundColor = [UIColor colorWithRed:1.0 green:0.6372 blue:0.0 alpha:1.0];
-        } else if (minutesLeft <= 10) {
-            self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.877 blue:0.2838 alpha:1.0];
-        } else {
-            self.view.backgroundColor = [UIColor colorWithRed:0.0 green:0.46 blue:1.0 alpha:1.0];
-        }
-    }];
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
+    int index = [self.stopViewControllers indexOfObject:viewController];
     
+    if ((index == [self.stopViewControllers count]-1) || (index == NSNotFound)) {
+        return nil;
+    } else {
+        index++;
+        return self.stopViewControllers[index];
+    }
 }
 
-- (int)getMinutesFromInterval:(NSTimeInterval)interval {
-    return floor(interval/60);
+- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
+    return [self.stopViewControllers count];
 }
 
-- (int)getSecondsFromInterval:(NSTimeInterval)interval {
-    return (int)interval%60;
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
+    return 0;
 }
+
 
 @end
