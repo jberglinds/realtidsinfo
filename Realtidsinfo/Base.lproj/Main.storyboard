@@ -39,7 +39,7 @@
         <!--Realtime Page View Controller-->
         <scene sceneID="wiz-l0-4s5">
             <objects>
-                <pageViewController storyboardIdentifier="RealtimePageViewController" autoresizesArchivedViewToFullSize="NO" title="Realtime Page View Controller" extendedLayoutIncludesOpaqueBars="YES" modalTransitionStyle="flipHorizontal" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="a3J-jv-FHr" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="RealtimePageViewController" autoresizesArchivedViewToFullSize="NO" title="Realtime Page View Controller" extendedLayoutIncludesOpaqueBars="YES" modalTransitionStyle="flipHorizontal" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="a3J-jv-FHr" customClass="UIPageViewControllerWithOverlayIndicator" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NL2-df-2lb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -83,7 +83,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXe-Gg-DIR">
-                                <rect key="frame" x="80" y="318.5" width="864" height="131.5"/>
+                                <rect key="frame" x="80" y="319" width="864" height="131.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 minuter och 42 sekunder " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv1-u6-Krm">
                                         <rect key="frame" x="10" y="25" width="843.5" height="76.5"/>
@@ -101,7 +101,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uppdaterad för 17 sekunder sedan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zpe-Hd-MXP">
-                                <rect key="frame" x="339" y="470" width="347" height="29"/>
+                                <rect key="frame" x="338.5" y="470.5" width="347" height="29"/>
                                 <fontDescription key="fontDescription" name="SanFranciscoDisplay-Light" family="San Francisco Display" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>

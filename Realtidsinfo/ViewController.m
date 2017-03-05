@@ -39,11 +39,17 @@
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
     
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    // Get statusbar style from first page in pageview
+    return self.pageViewController.viewControllers[0];
 }
 
 /*
@@ -66,7 +72,7 @@
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
-    int index = [self.stopViewControllers indexOfObject:viewController];
+    NSInteger index = [self.stopViewControllers indexOfObject:viewController];
     
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
@@ -77,7 +83,7 @@
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    int index = [self.stopViewControllers indexOfObject:viewController];
+    NSInteger index = [self.stopViewControllers indexOfObject:viewController];
     
     if ((index == [self.stopViewControllers count]-1) || (index == NSNotFound)) {
         return nil;
