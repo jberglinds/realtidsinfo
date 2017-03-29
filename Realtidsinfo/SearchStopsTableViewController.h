@@ -1,5 +1,5 @@
 //
-//  AddNewViewController.h
+//  SearchStopsTableViewController.h
 //  Realtidsinfo
 //
 //  Created by Jonathan Berglind on 2017-03-29.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddNewViewController : UIViewController
+@interface SearchStopsTableViewController : UITableViewController
 
 @end

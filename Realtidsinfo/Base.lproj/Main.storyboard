@@ -18,40 +18,70 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Add New View Controller-->
-        <scene sceneID="2E3-3Z-V8R">
+        <!--Select stop-->
+        <scene sceneID="fa5-HV-PRQ">
             <objects>
-                <viewController id="3Ao-Xa-RGO" customClass="AddNewViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="sIV-46-iny"/>
-                        <viewControllerLayoutGuide type="bottom" id="rB0-Hp-l2q"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="e3N-gp-AbL">
-                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                <tableViewController id="IeO-cw-LIZ" customClass="SearchStopsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="g4r-pf-bxD">
+                        <rect key="frame" x="0.0" y="44" width="540" height="576"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C6S-r7-6OT">
-                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <items>
-                                    <navigationItem title="New stop" id="pJD-T0-36p">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="N0f-0k-VLP">
-                                            <connections>
-                                                <action selector="cancelButtonPressed:" destination="3Ao-Xa-RGO" id="SIl-W6-BkN"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Add" id="Hoa-1g-7iN"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="O3p-xI-slz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for stops" translucent="NO" id="3vC-ou-sTS">
+                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
+                            <connections>
+                                <outlet property="delegate" destination="IeO-cw-LIZ" id="mrg-NR-ulI"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" textLabel="vKu-Fw-Xxo" style="IBUITableViewCellStyleDefault" id="Z1D-fh-Pcs">
+                                <rect key="frame" x="0.0" y="72" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z1D-fh-Pcs" id="x2w-7f-UAB">
+                                    <rect key="frame" x="0.0" y="0.0" width="507" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vKu-Fw-Xxo">
+                                            <rect key="frame" x="15" y="0.0" width="490" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IeO-cw-LIZ" id="kOT-GY-aCJ"/>
+                            <outlet property="delegate" destination="IeO-cw-LIZ" id="WZu-w7-S8c"/>
+                        </connections>
+                    </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Select stop" id="l9N-6J-HyK">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wcI-aJ-sk3">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="IeO-cw-LIZ" id="3fl-tJ-qsF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="XRG-FB-NbR" id="FjU-Hl-lGU"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pi9-vH-wIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController searchResultsTitle="" id="XRG-FB-NbR">
+                    <connections>
+                        <outlet property="delegate" destination="IeO-cw-LIZ" id="fvg-Ng-07d"/>
+                        <outlet property="searchBar" destination="3vC-ou-sTS" id="czW-pF-mbC"/>
+                        <outlet property="searchContentsController" destination="IeO-cw-LIZ" id="9VH-zk-HuI"/>
+                        <outlet property="searchResultsDataSource" destination="IeO-cw-LIZ" id="soF-Jy-HbJ"/>
+                        <outlet property="searchResultsDelegate" destination="IeO-cw-LIZ" id="xc4-t5-V9x"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="288" y="-911"/>
+            <point key="canvasLocation" x="1253" y="-780"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="F8m-ep-YQZ">
@@ -68,8 +98,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="j0J-MX-A2K">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="es9-pl-TcL">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="3Ao-Xa-RGO" kind="presentation" modalPresentationStyle="formSheet" id="mVl-HR-GDq"/>
+                                <segue destination="Q3s-lS-Ab9" kind="presentation" modalPresentationStyle="formSheet" id="zm5-s7-Gxi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -86,7 +117,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NL2-df-2lb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="961" y="-552"/>
+            <point key="canvasLocation" x="-28" y="491"/>
         </scene>
         <!--Realtime Stop View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -171,14 +202,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="961" y="117"/>
+            <point key="canvasLocation" x="604" y="491"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YyT-mW-X7p">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uZ0-te-h8u" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="kda-zc-Z73">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="kda-zc-Z73">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -191,9 +222,27 @@
             </objects>
             <point key="canvasLocation" x="-371" y="-217"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="q65-ZX-UNQ">
+            <objects>
+                <navigationController id="Q3s-lS-Ab9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="jNa-Re-QAM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="IeO-cw-LIZ" kind="relationship" relationship="rootViewController" id="A6T-fj-b2w"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vNE-nl-ngQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="879" y="-780"/>
+        </scene>
     </scenes>
     <resources>
         <image name="BusIcon" width="50" height="50"/>
     </resources>
-    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
