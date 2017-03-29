@@ -20,6 +20,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // Set navbar to transparent
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimePageViewController"];
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
@@ -39,6 +43,7 @@
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
     
+    [self.navigationController setNeedsStatusBarAppearanceUpdate];
     [self setNeedsStatusBarAppearanceUpdate];
 }
 

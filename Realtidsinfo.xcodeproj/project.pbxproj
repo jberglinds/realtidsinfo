@@ -23,6 +23,7 @@
 		AB9B5C651E60C0B800BC51AE /* RealtidsinfoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C641E60C0B800BC51AE /* RealtidsinfoUITests.m */; };
 		ABBDD3FA1E66F4370077B07C /* SanFranciscoDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF771E66F1BF00E297AF /* SanFranciscoDisplay-Medium.otf */; };
 		ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */; };
+		ABE73DCF1E8BC60F00C70E13 /* AddNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DCE1E8BC60F00C70E13 /* AddNewViewController.m */; };
 		B2A33C096D774D41927ABA0A /* libPods-RealtidsinfoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6F694AD004BDEE85784314 /* libPods-RealtidsinfoUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +79,8 @@
 		AB9B5C601E60C0B800BC51AE /* RealtidsinfoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealtidsinfoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9B5C641E60C0B800BC51AE /* RealtidsinfoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealtidsinfoUITests.m; sourceTree = "<group>"; };
 		AB9B5C661E60C0B800BC51AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABE73DCD1E8BC60F00C70E13 /* AddNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNewViewController.h; sourceTree = "<group>"; };
+		ABE73DCE1E8BC60F00C70E13 /* AddNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewViewController.m; sourceTree = "<group>"; };
 		CAD641214806E76A8005B5E8 /* Pods-RealtidsinfoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtidsinfoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealtidsinfoUITests/Pods-RealtidsinfoUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +172,8 @@
 			children = (
 				AB85C8EE1E6B264100D9181E /* ViewController.h */,
 				AB85C8EF1E6B264100D9181E /* ViewController.m */,
+				ABE73DCD1E8BC60F00C70E13 /* AddNewViewController.h */,
+				ABE73DCE1E8BC60F00C70E13 /* AddNewViewController.m */,
 				AB9B5C451E60C0B800BC51AE /* RealtimeStopViewController.h */,
 				AB9B5C461E60C0B800BC51AE /* RealtimeStopViewController.m */,
 				AB602E5F1E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.h */,
@@ -504,6 +509,7 @@
 				AB9B5C471E60C0B800BC51AE /* RealtimeStopViewController.m in Sources */,
 				AB602E611E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.m in Sources */,
 				AB5FBA711E647A7E009ACA2F /* RealtimeSite.m in Sources */,
+				ABE73DCF1E8BC60F00C70E13 /* AddNewViewController.m in Sources */,
 				AB9B5C441E60C0B700BC51AE /* AppDelegate.m in Sources */,
 				AB9B5C411E60C0B700BC51AE /* main.m in Sources */,
 			);
