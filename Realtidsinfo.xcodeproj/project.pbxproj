@@ -24,6 +24,7 @@
 		ABBDD3FA1E66F4370077B07C /* SanFranciscoDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF771E66F1BF00E297AF /* SanFranciscoDisplay-Medium.otf */; };
 		ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */; };
 		ABE73DD21E8C08A400C70E13 /* SearchStopsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */; };
+		ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */; };
 		B2A33C096D774D41927ABA0A /* libPods-RealtidsinfoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6F694AD004BDEE85784314 /* libPods-RealtidsinfoUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		AB9B5C661E60C0B800BC51AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABE73DD01E8C08A400C70E13 /* SearchStopsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchStopsTableViewController.h; sourceTree = "<group>"; };
 		ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchStopsTableViewController.m; sourceTree = "<group>"; };
+		ABE73DD31E8C351100C70E13 /* TrafiklabAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrafiklabAPI.h; path = Model/TrafiklabAPI.h; sourceTree = "<group>"; };
+		ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrafiklabAPI.m; path = Model/TrafiklabAPI.m; sourceTree = "<group>"; };
 		CAD641214806E76A8005B5E8 /* Pods-RealtidsinfoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtidsinfoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealtidsinfoUITests/Pods-RealtidsinfoUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +141,8 @@
 		AB5FBA721E647A83009ACA2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ABE73DD31E8C351100C70E13 /* TrafiklabAPI.h */,
+				ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */,
 				AB5FBA6D1E643AE1009ACA2F /* API-keys.plist */,
 				AB5FBA6F1E647A7E009ACA2F /* RealtimeSite.h */,
 				AB5FBA701E647A7E009ACA2F /* RealtimeSite.m */,
@@ -508,6 +513,7 @@
 				AB85C8F01E6B264100D9181E /* ViewController.m in Sources */,
 				AB9B5C471E60C0B800BC51AE /* RealtimeStopViewController.m in Sources */,
 				ABE73DD21E8C08A400C70E13 /* SearchStopsTableViewController.m in Sources */,
+				ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */,
 				AB602E611E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.m in Sources */,
 				AB5FBA711E647A7E009ACA2F /* RealtimeSite.m in Sources */,
 				AB9B5C441E60C0B700BC51AE /* AppDelegate.m in Sources */,
