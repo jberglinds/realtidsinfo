@@ -10,7 +10,7 @@
 
 @interface RealtimeStopViewController : UIViewController
 
-@property (strong, nonatomic) NSString *locationName;
+@property (strong, nonatomic) NSString *location;
 
 @end
 

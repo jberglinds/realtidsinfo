@@ -37,7 +37,7 @@
 # pragma mark - SL Platsuppslag
 NSString *const LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json?key=%@&searchstring=%@&maxresults=30";
 
-- (void)getStopsMatchingString:(NSString *)searchString completion:(void(^)(NSArray *))completion {
+- (void)getStopsMatchingString:(NSString *)searchString completion:(void(^)(NSDictionary *))completion {
     NSString *url = [NSString stringWithFormat:LOOKUP_API_ENDPOINT, self.LOOKUP_API_KEY, searchString];
     [self getFromUrl:url completion:completion];
 }
@@ -45,13 +45,13 @@ NSString *const LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json?key
 # pragma mark - SL Realtidsinformation 4
 NSString *const REALTIME_API_ENDPOINT = @"http://api.sl.se/api2/realtimedeparturesV4.json?key=%@&siteid=%ld&timewindow=60";
 
-- (void)getRealtimeForStop:(NSInteger)siteID completion:(void(^)(NSArray *))completion {
+- (void)getRealtimeForStop:(NSInteger)siteID completion:(void(^)(NSDictionary *))completion {
     NSString *url = [NSString stringWithFormat:REALTIME_API_ENDPOINT, self.REALTIME_API_KEY, (long)siteID];
     [self getFromUrl:url completion:completion];
 }
 
 # pragma mark - Networking
-- (void)getFromUrl:(NSString *)url completion:(void(^)(NSArray *))completion {
+- (void)getFromUrl:(NSString *)url completion:(void(^)(NSDictionary *))completion {
     [self.manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSLog(@"Success: (GET : %@)", url);
         completion(responseObject);

@@ -7,7 +7,7 @@
 //
 
 #import "RealtimeSite.h"
-#import "AFNetworking.h"
+#import "TrafiklabAPI.h"
 
 @interface RealtimeSite()
 @property (nonatomic) NSInteger siteID;
@@ -18,17 +18,21 @@
 @property (strong, nonatomic, readwrite) NSDate *expectedAt;
 @property (strong, nonatomic, readwrite) NSDate *updatedAt;
 
+@property (strong, nonatomic) TrafiklabAPI *API;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSTimer *updateTimer;
 @end
 
-NSString const *REALTIME_API_KEY;
-NSString const *API_ENDPOINT = @"http://api.sl.se/api2/realtimedeparturesV4.json";
-CGFloat const UPDATE_FREQ = 15.0;
+float const UPDATE_FREQ = 15.0;
 
 @implementation RealtimeSite
 
 # pragma mark - Initialization
+- (TrafiklabAPI *)API {
+    if (!_API) _API = [[TrafiklabAPI alloc] init];
+    return _API;
+}
+
 - (NSDateFormatter *)dateFormatter {
     if (!_dateFormatter) {
         _dateFormatter = [[NSDateFormatter alloc] init];
@@ -37,17 +41,11 @@ CGFloat const UPDATE_FREQ = 15.0;
     return _dateFormatter;
 }
 
-- (void)setAPIKey {
-    NSDictionary *keys = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"API-keys" ofType:@"plist"]];
-    REALTIME_API_KEY = keys[@"realtimedeparturesV4"];
-}
-
 - (instancetype)initWithSiteID:(NSInteger)ID {
     self = [super init];
     
     if (self) {
         self.siteID = ID;
-        [self setAPIKey];
         [self updateRealTime];
     }
     
@@ -68,12 +66,8 @@ CGFloat const UPDATE_FREQ = 15.0;
 }
 
 - (void)updateRealTime {
-    NSString *urlString = [API_ENDPOINT stringByAppendingString:[NSString stringWithFormat:@"?key=%@&siteid=%ld&timewindow=60",
-                                                                 REALTIME_API_KEY, (long)self.siteID]];
-    
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *responseData = responseObject[@"ResponseData"];
+    [self.API getRealtimeForStop:self.siteID completion:^(NSDictionary *response) {
+        NSDictionary *responseData = response[@"ResponseData"];
         
         NSDate *latestUpdate = [self.dateFormatter dateFromString:responseData[@"LatestUpdate"]];
         
@@ -93,9 +87,6 @@ CGFloat const UPDATE_FREQ = 15.0;
             self.busName = @"Inga avgångar";
             self.expectedAt = nil;
         }
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        //TODO: Deal with error in a better way
-        NSLog(@"RealtimeSite updateRealTime(): %@", error);
     }];
 }
 

@@ -12,8 +12,8 @@
 
 - (instancetype)init;
 
-- (void)getStopsMatchingString:(NSString *)searchString completion:(void(^)(NSArray *))completion;
+- (void)getStopsMatchingString:(NSString *)searchString completion:(void(^)(NSDictionary *))completion;
 
-- (void)getRealtimeForStop:(NSInteger)siteID completion:(void(^)(NSArray *))completion;
+- (void)getRealtimeForStop:(NSInteger)siteID completion:(void(^)(NSDictionary *))completion;
 
 @end

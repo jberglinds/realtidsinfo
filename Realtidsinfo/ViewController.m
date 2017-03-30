@@ -29,11 +29,11 @@
     self.pageViewController.delegate = self;
     
     RealtimeStopViewController *test1 = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
-    test1.locationName = @"Riksten";
+    test1.location = @"Riksten";
     [self.stopViewControllers addObject:test1];
     
     RealtimeStopViewController *test2 = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
-    test2.locationName = @"Huddinge";
+    test2.location = @"Huddinge";
     [self.stopViewControllers addObject:test2];
     
     [self.pageViewController setViewControllers:@[test1] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];

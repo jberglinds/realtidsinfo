@@ -8,9 +8,11 @@
 
 #import "RealtimeStopViewController.h"
 #import "RealtimeSite.h"
-#import "AFNetworking.h"
+#import "TrafiklabAPI.h"
 
 @interface RealtimeStopViewController ()
+@property (strong, nonatomic) TrafiklabAPI *API;
+
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLabel;
 @property (weak, nonatomic) IBOutlet UIView *countdownView;
@@ -23,16 +25,10 @@
 
 @implementation RealtimeStopViewController
 
-NSString const *LOCATION;
-NSString const *LOOKUP_API_KEY;
-NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
-
 #pragma mark - UIViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    LOCATION = self.locationName;
     
     [self setup];
     // Add border around countdown view, only for the looks.
@@ -64,26 +60,20 @@ NSString const *LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json";
 }
 
 #pragma mark - Initialization
-- (void)setAPIKey {
-    NSDictionary *keys = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"API-keys" ofType:@"plist"]];
-    LOOKUP_API_KEY = keys[@"typeahead"];
+- (TrafiklabAPI *)API {
+    if (!_API) _API = [[TrafiklabAPI alloc] init];
+    return _API;
 }
 
 - (void)setup {
-    [self setAPIKey];
-    NSString *urlString = [LOOKUP_API_ENDPOINT stringByAppendingString:[NSString stringWithFormat:@"?key=%@&searchstring=%@",
-                                                                        LOOKUP_API_KEY, LOCATION]];
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSDictionary *firstHit = responseObject[@"ResponseData"][0];
-        NSInteger siteID = [firstHit[@"SiteId"] integerValue];
-        self.site = [[RealtimeSite alloc] initWithSiteID:siteID];
-        [self.site startUpdates];
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        //TODO: Deal with error in a better way
-        NSLog(@"ViewController setup(): %@", error);
+    [self.API getStopsMatchingString:self.location completion:^(NSDictionary *response) {
+        if (response) {
+            NSDictionary *firstHit = response[@"ResponseData"][0];
+            NSInteger siteID = [firstHit[@"SiteId"] integerValue];
+            self.site = [[RealtimeSite alloc] initWithSiteID:siteID];
+            [self.site startUpdates];
+        }
     }];
-    
 }
 
 #pragma mark - UI Updates
