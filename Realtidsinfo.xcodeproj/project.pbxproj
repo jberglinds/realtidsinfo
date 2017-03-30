@@ -25,7 +25,6 @@
 		ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */; };
 		ABE73DD21E8C08A400C70E13 /* SearchStopsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */; };
 		ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */; };
-		ABE73DD81E8D44B500C70E13 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE73DD61E8D361600C70E13 /* CoreLocation.framework */; };
 		B2A33C096D774D41927ABA0A /* libPods-RealtidsinfoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6F694AD004BDEE85784314 /* libPods-RealtidsinfoUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -94,7 +93,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABE73DD81E8D44B500C70E13 /* CoreLocation.framework in Frameworks */,
 				8E5311B4BA04EF1B3188403C /* libPods-Realtidsinfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

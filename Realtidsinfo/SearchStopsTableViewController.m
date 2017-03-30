@@ -36,7 +36,7 @@
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
-    self.searchController.searchBar.placeholder = @"Search for stops";
+    self.searchController.searchBar.placeholder = @"Sök efter hållplatser";
     self.definesPresentationContext = YES;
     self.tableView.tableHeaderView = self.searchController.searchBar;
 }
@@ -95,9 +95,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
-        return @"Search results";
+        return @"Sökresultat";
     } else {
-        return @"Nearby stops";
+        return @"Närliggande hållplatser";
     }
 }
 

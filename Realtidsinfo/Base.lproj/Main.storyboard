@@ -18,7 +18,7 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Select stop-->
+        <!--Hållplatser-->
         <scene sceneID="fa5-HV-PRQ">
             <objects>
                 <tableViewController id="IeO-cw-LIZ" customClass="SearchStopsTableViewController" sceneMemberID="viewController">
@@ -75,8 +75,8 @@
                             <outlet property="delegate" destination="IeO-cw-LIZ" id="WZu-w7-S8c"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Select stop" id="l9N-6J-HyK">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wcI-aJ-sk3">
+                    <navigationItem key="navigationItem" title="Hållplatser" id="l9N-6J-HyK">
+                        <barButtonItem key="leftBarButtonItem" title="Avbryt" id="wcI-aJ-sk3">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="IeO-cw-LIZ" id="3fl-tJ-qsF"/>
                             </connections>
@@ -84,10 +84,6 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pi9-vH-wIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="eMt-ag-I7D">
-                    <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </activityIndicatorView>
             </objects>
             <point key="canvasLocation" x="1253" y="-780"/>
         </scene>
