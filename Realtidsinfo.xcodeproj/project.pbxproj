@@ -25,6 +25,7 @@
 		ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */; };
 		ABE73DD21E8C08A400C70E13 /* SearchStopsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */; };
 		ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */; };
+		ABE73DD81E8D44B500C70E13 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE73DD61E8D361600C70E13 /* CoreLocation.framework */; };
 		B2A33C096D774D41927ABA0A /* libPods-RealtidsinfoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6F694AD004BDEE85784314 /* libPods-RealtidsinfoUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchStopsTableViewController.m; sourceTree = "<group>"; };
 		ABE73DD31E8C351100C70E13 /* TrafiklabAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrafiklabAPI.h; path = Model/TrafiklabAPI.h; sourceTree = "<group>"; };
 		ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrafiklabAPI.m; path = Model/TrafiklabAPI.m; sourceTree = "<group>"; };
+		ABE73DD61E8D361600C70E13 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CAD641214806E76A8005B5E8 /* Pods-RealtidsinfoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealtidsinfoUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealtidsinfoUITests/Pods-RealtidsinfoUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABE73DD81E8D44B500C70E13 /* CoreLocation.framework in Frameworks */,
 				8E5311B4BA04EF1B3188403C /* libPods-Realtidsinfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,6 +134,7 @@
 		9B933F1AA13971E1198E9DC6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ABE73DD61E8D361600C70E13 /* CoreLocation.framework */,
 				6E73218B4BDAA647A736F907 /* libPods-Realtidsinfo.a */,
 				88DD7DEFEE8489E7464746D6 /* libPods-RealtidsinfoTests.a */,
 				0A6F694AD004BDEE85784314 /* libPods-RealtidsinfoUITests.a */,

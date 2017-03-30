@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface SearchStopsTableViewController : UITableViewController <UISearchResultsUpdating>
+@interface SearchStopsTableViewController : UITableViewController <UISearchResultsUpdating, CLLocationManagerDelegate>
 
 @end
