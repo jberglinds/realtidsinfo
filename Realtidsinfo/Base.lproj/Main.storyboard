@@ -23,26 +23,18 @@
             <objects>
                 <tableViewController id="IeO-cw-LIZ" customClass="SearchStopsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="g4r-pf-bxD">
-                        <rect key="frame" x="0.0" y="44" width="540" height="576"/>
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for stops" translucent="NO" id="3vC-ou-sTS">
-                            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="search"/>
-                            <connections>
-                                <outlet property="delegate" destination="IeO-cw-LIZ" id="mrg-NR-ulI"/>
-                            </connections>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" textLabel="vKu-Fw-Xxo" style="IBUITableViewCellStyleDefault" id="Z1D-fh-Pcs">
-                                <rect key="frame" x="0.0" y="72" width="540" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z1D-fh-Pcs" id="x2w-7f-UAB">
                                     <rect key="frame" x="0.0" y="0.0" width="507" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vKu-Fw-Xxo">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vKu-Fw-Xxo">
                                             <rect key="frame" x="15" y="0.0" width="490" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
@@ -53,12 +45,12 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="IeO-cw-LIZ" id="kOT-GY-aCJ"/>
                             <outlet property="delegate" destination="IeO-cw-LIZ" id="WZu-w7-S8c"/>
                         </connections>
                     </tableView>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Select stop" id="l9N-6J-HyK">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wcI-aJ-sk3">
                             <connections>
@@ -66,20 +58,8 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="XRG-FB-NbR" id="FjU-Hl-lGU"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pi9-vH-wIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController searchResultsTitle="" id="XRG-FB-NbR">
-                    <connections>
-                        <outlet property="delegate" destination="IeO-cw-LIZ" id="fvg-Ng-07d"/>
-                        <outlet property="searchBar" destination="3vC-ou-sTS" id="czW-pF-mbC"/>
-                        <outlet property="searchContentsController" destination="IeO-cw-LIZ" id="9VH-zk-HuI"/>
-                        <outlet property="searchResultsDataSource" destination="IeO-cw-LIZ" id="soF-Jy-HbJ"/>
-                        <outlet property="searchResultsDelegate" destination="IeO-cw-LIZ" id="xc4-t5-V9x"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1253" y="-780"/>
         </scene>
@@ -228,7 +208,7 @@
                 <navigationController id="Q3s-lS-Ab9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="jNa-Re-QAM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jNa-Re-QAM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

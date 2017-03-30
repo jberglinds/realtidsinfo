@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SearchStopsTableViewController : UITableViewController
+@interface SearchStopsTableViewController : UITableViewController <UISearchResultsUpdating>
 
 @end

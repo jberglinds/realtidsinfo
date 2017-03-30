@@ -38,7 +38,8 @@
 NSString *const LOOKUP_API_ENDPOINT = @"http://api.sl.se/api2/typeahead.json?key=%@&searchstring=%@&maxresults=30";
 
 - (void)getStopsMatchingString:(NSString *)searchString completion:(void(^)(NSDictionary *))completion {
-    NSString *url = [NSString stringWithFormat:LOOKUP_API_ENDPOINT, self.LOOKUP_API_KEY, searchString];
+    NSString *percentEscapedString = [searchString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString *url = [NSString stringWithFormat:LOOKUP_API_ENDPOINT, self.LOOKUP_API_KEY, percentEscapedString];
     [self getFromUrl:url completion:completion];
 }
 

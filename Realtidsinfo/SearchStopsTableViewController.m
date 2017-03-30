@@ -7,21 +7,26 @@
 //
 
 #import "SearchStopsTableViewController.h"
+#import "TrafiklabAPI.h"
 
 @interface SearchStopsTableViewController ()
+@property (strong, nonatomic) TrafiklabAPI *API;
 
+@property (strong, nonatomic) UISearchController *searchController;
+@property (strong, nonatomic) NSArray *searchResults;
 @end
 
-@implementation SearchStopsTableViewController
+@implementation SearchStopsTableViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.placeholder = @"Search stops";
+    self.definesPresentationContext = YES;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,61 +34,47 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (TrafiklabAPI *)API {
+    if(!_API) _API = [[TrafiklabAPI alloc] init];
+        return _API;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
+        return [self.searchResults count];
+    } else {
+        return 0;
+    }
 }
 
-/*
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    // Get results from API
+    [self.API getStopsMatchingString:searchController.searchBar.text completion:^(NSDictionary *response) {
+        self.searchResults = response[@"ResponseData"];
+        [self.tableView reloadData];
+    }];
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult" forIndexPath:indexPath];
     
-    // Configure the cell...
+    if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
+        cell.textLabel.text = self.searchResults[indexPath.row][@"Name"];
+    } else {
+        
+    }
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
