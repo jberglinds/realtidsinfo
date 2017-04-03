@@ -28,6 +28,17 @@ float const UPDATE_FREQ = 15.0;
 @implementation RealtimeSite
 
 # pragma mark - Initialization
+- (instancetype)initWithSiteID:(NSInteger)ID {
+    self = [super init];
+    
+    if (self) {
+        self.siteID = ID;
+        [self updateRealTime];
+    }
+    
+    return self;
+}
+
 - (TrafiklabAPI *)API {
     if (!_API) _API = [[TrafiklabAPI alloc] init];
     return _API;
@@ -39,17 +50,6 @@ float const UPDATE_FREQ = 15.0;
         [_dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
     }
     return _dateFormatter;
-}
-
-- (instancetype)initWithSiteID:(NSInteger)ID {
-    self = [super init];
-    
-    if (self) {
-        self.siteID = ID;
-        [self updateRealTime];
-    }
-    
-    return self;
 }
 
 # pragma mark - Updates
@@ -74,6 +74,7 @@ float const UPDATE_FREQ = 15.0;
         // Only update if response has newer update, API is not very good at giving latest at all times.
         if (!self.updatedAt || [latestUpdate timeIntervalSinceDate:self.updatedAt] > 0) {
             self.updatedAt = latestUpdate;
+            // Loop over response until first bus in right direction
             for (NSDictionary *bus in responseData[@"Buses"]) {
                 if ([bus[@"JourneyDirection"] isEqual: @2]) {
                     self.locationName = bus[@"StopAreaName"];

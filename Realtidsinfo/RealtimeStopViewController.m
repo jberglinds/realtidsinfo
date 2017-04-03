@@ -66,6 +66,7 @@
 }
 
 - (void)setup {
+    // Get siteid from API using location string and create RealtimeSite object (model)
     [self.API getStopsMatchingString:self.location completion:^(NSDictionary *response) {
         if (response) {
             NSDictionary *firstHit = response[@"ResponseData"][0];
@@ -93,13 +94,14 @@
     [self updateBackgroundToTimeLeft:timeLeft];
 }
 
+// Set different background colors for view depending on time left to departure
 - (void)updateBackgroundToTimeLeft:(NSTimeInterval)timeLeft {
     [UIView animateWithDuration:0.9f animations:^{
         int minutesLeft = [self getMinutesFromInterval:timeLeft];
         int secondsLeft = [self getSecondsFromInterval:timeLeft];
         if (minutesLeft <= 0) {
             // Pulsate
-            if ((secondsLeft % 2) == 0) {
+            if ((secondsLeft % 2) != 0) {
                 self.view.backgroundColor = [UIColor colorWithRed:1.0 green:0.0145 blue:0.0 alpha:1.0];
             } else {
                 self.view.backgroundColor = [UIColor blackColor];

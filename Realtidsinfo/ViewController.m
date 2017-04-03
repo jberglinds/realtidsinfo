@@ -17,32 +17,33 @@
 
 @implementation ViewController
 
-#pragma mark - Initialization
+#pragma mark - UIViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // Set navbar to transparent
+    // Set navbar to be transparent
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     
+    // Set up pageview controller that will hold all the RealtimeStopViewControllers
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimePageViewController"];
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
     
+    // Set up a test page
     RealtimeStopViewController *test1 = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
     test1.location = @"Riksten";
     [self.stopViewControllers addObject:test1];
-    
+    // And add to pageview
     [self.pageViewController setViewControllers:@[test1] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     
+    // Add pageview to view
     self.pageViewController.view.frame = self.view.frame;
     [self addChildViewController:self.pageViewController];
     [self.view addSubview:self.pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
     
-    [self.navigationController setNeedsStatusBarAppearanceUpdate];
-    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,15 +56,13 @@
     return self.pageViewController.viewControllers[0];
 }
 
+#pragma mark - Initialization
 - (NSMutableArray *)stopViewControllers {
     if (!_stopViewControllers) _stopViewControllers = [[NSMutableArray alloc] init];
     return _stopViewControllers;
 }
 
-#pragma mark - UIPageViewController
-- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers {
-}
-
+#pragma mark - UIPageViewControllerDataSource
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSInteger index = [self.stopViewControllers indexOfObject:viewController];
     
@@ -86,16 +85,19 @@
     }
 }
 
+// How many dots for indicator
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController {
     return [self.stopViewControllers count];
 }
 
+// Which dot should be active in indicator
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
     return [self.stopViewControllers indexOfObject:[pageViewController.viewControllers firstObject]];
 }
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Triggered from navbar button
     if ([segue.identifier isEqualToString:@"addNewStopSegue"]) {
         UINavigationController *navigationVC = (UINavigationController *)segue.destinationViewController;
         SearchStopsTableViewController *destinationVC = (SearchStopsTableViewController *)navigationVC.topViewController;
@@ -127,9 +129,11 @@
 
 #pragma mark - Actions
 - (IBAction)removeButtonPressed:(UIBarButtonItem *)sender {
+    // Ask for confirmation with dialog before removing stop
     UIAlertController *confirmController = [UIAlertController alertControllerWithTitle:@"Ta bort hållplats" message:@"Vill du verkligen ta bort hållplatsen?" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *actionConfirm = [UIAlertAction actionWithTitle:@"Ta bort" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        // Remove from array with controllers for pageview
         RealtimeStopViewController *currentVC = [self.pageViewController.viewControllers firstObject];
         NSInteger index = [self.stopViewControllers indexOfObject:currentVC];
         [self.stopViewControllers removeObject:currentVC];

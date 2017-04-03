@@ -64,10 +64,10 @@ NSString *const NEARBY_API_ENDPOINT = @"http://api.sl.se/api2/nearbystops.json?k
 #pragma mark - Networking
 - (void)getFromUrl:(NSString *)url completion:(void(^)(NSDictionary *))completion {
     [self.manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSLog(@"Success: (GET: %@)", url);
+        NSLog(@"Success: (GET %@)", url);
         completion(responseObject);
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        NSLog(@"Failure: (GET: %@) \nReason: %@", url, error);
+        NSLog(@"Failure: (GET %@) \nReason: %@", url, error);
         completion(nil);
     }];
 }

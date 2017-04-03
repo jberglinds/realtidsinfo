@@ -21,7 +21,7 @@
 
 @implementation SearchStopsTableViewController 
 
-#pragma mark - Initialization
+#pragma mark - UIViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -32,7 +32,7 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager requestLocation];
     
-    // Add search controller with searchbar for searching for stops
+    // Add search controller with searchbar for searching for stops, using existing tableview for results
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;
@@ -46,17 +46,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Initialization
 - (TrafiklabAPI *)API {
     if(!_API) _API = [[TrafiklabAPI alloc] init];
         return _API;
 }
 
 #pragma mark - CLLocationManagerDelegate
+// Called when location was updated
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     [self.locationManager stopUpdatingLocation];
     CLLocation *currentLocation = [locations lastObject];
     
-    // Lookup nearby stops using API
+    // Lookup nearby stops using API and reload table to show results
     [self.API getNearbyStopsForLat:currentLocation.coordinate.latitude Long:currentLocation.coordinate.longitude completion:^(NSDictionary *response) {
         self.locationResults = response[@"LocationList"][@"StopLocation"];
         [self.tableView reloadData];
@@ -64,13 +66,16 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    [self.locationManager stopUpdatingLocation];
+    // TODO: Handle it like an adult
     NSLog(@"%@", error);
 }
 
 #pragma mark - UISearchResultsUpdating
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
+    // If search is active
     if(![self.searchController.searchBar.text isEqualToString:@""]) {
-        // Get results from API
+        // Get results from API and reload table to show them
         [self.API getStopsMatchingString:searchController.searchBar.text completion:^(NSDictionary *response) {
             self.searchResults = response[@"ResponseData"];
             [self.tableView reloadData];
@@ -86,6 +91,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // If search is active
     if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
         return [self.searchResults count];
     } else {
@@ -93,7 +99,9 @@
     }
 }
 
+// Section title depending on if we are searching or not
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    // If search is active
     if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
         return @"Sökresultat";
     } else {
@@ -104,6 +112,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
+    // Use different looking cells depending on search result or location result
+    // If search is active:
     if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult" forIndexPath:indexPath];
         cell.textLabel.text = self.searchResults[indexPath.row][@"Name"];
@@ -115,6 +125,7 @@
     
     return cell;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.delegate addNewStopWithName:[tableView cellForRowAtIndexPath:indexPath].textLabel.text];
