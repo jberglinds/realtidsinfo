@@ -16,6 +16,7 @@
 
 @implementation ViewController
 
+#pragma mark - Initialization
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -31,10 +32,6 @@
     RealtimeStopViewController *test1 = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
     test1.location = @"Riksten";
     [self.stopViewControllers addObject:test1];
-    
-    RealtimeStopViewController *test2 = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
-    test2.location = @"Huddinge";
-    [self.stopViewControllers addObject:test2];
     
     [self.pageViewController setViewControllers:@[test1] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     
@@ -56,16 +53,6 @@
     // Get statusbar style from first page in pageview
     return self.pageViewController.viewControllers[0];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (NSMutableArray *)stopViewControllers {
     if (!_stopViewControllers) _stopViewControllers = [[NSMutableArray alloc] init];
@@ -103,7 +90,23 @@
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController {
-    return 0;
+    return [self.stopViewControllers indexOfObject:[pageViewController.viewControllers firstObject]];
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"addNewStopSegue"]) {
+        UINavigationController *destinationVC = (UINavigationController *)segue.destinationViewController;
+        ((SearchStopsTableViewController *) destinationVC.topViewController).delegate = self;
+    }
+}
+
+#pragma mark - SearchStopsTableViewControllerDelegate
+- (void)addNewStopWithName:(NSString *)stopName {
+    RealtimeStopViewController *newPage = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
+    newPage.location = stopName;
+    [self.stopViewControllers addObject:newPage];
+    [self.pageViewController setViewControllers:@[newPage] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
 }
 
 

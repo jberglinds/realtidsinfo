@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@protocol SearchStopsTableViewControllerDelegate
+
+- (void)addNewStopWithName:(NSString *)stopName;
+
+@end
+
 @interface SearchStopsTableViewController : UITableViewController <UISearchResultsUpdating, CLLocationManagerDelegate>
+
+@property (strong, nonatomic) id <SearchStopsTableViewControllerDelegate> delegate;
 
 @end

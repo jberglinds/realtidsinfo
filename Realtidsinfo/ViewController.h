@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchStopsTableViewController.h"
 
-@interface ViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface ViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, SearchStopsTableViewControllerDelegate>
 
 @end
