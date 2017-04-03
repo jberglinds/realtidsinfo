@@ -122,9 +122,28 @@
                     <view key="view" contentMode="scaleToFill" id="Uam-Gt-8XK">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lägg till en hållplats genom att trycka på +" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aA5-Uo-N6f">
+                                <rect key="frame" x="20" y="372" width="984" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aA5-Uo-N6f" firstAttribute="trailing" secondItem="Uam-Gt-8XK" secondAttribute="trailingMargin" id="7ig-s5-bAo"/>
+                            <constraint firstItem="aA5-Uo-N6f" firstAttribute="leading" secondItem="Uam-Gt-8XK" secondAttribute="leadingMargin" id="Vc4-iZ-7bT"/>
+                            <constraint firstItem="aA5-Uo-N6f" firstAttribute="centerY" secondItem="Uam-Gt-8XK" secondAttribute="centerY" id="pYO-mc-PcW"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="j0J-MX-A2K">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="moN-xj-PO7">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="removeButtonPressed:" destination="6LA-7r-Oqu" id="JKw-ZI-1kQ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="es9-pl-TcL">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -132,10 +151,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="removeStopButton" destination="moN-xj-PO7" id="2qm-kQ-dI2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGp-JL-XCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="288" y="-216"/>
+            <point key="canvasLocation" x="287.6953125" y="-216.40625"/>
         </scene>
         <!--Realtime Page View Controller-->
         <scene sceneID="wiz-l0-4s5">
