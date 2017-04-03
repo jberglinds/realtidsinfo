@@ -31,12 +31,19 @@
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
     
-    // Set up a test page
-    RealtimeStopViewController *test1 = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
-    test1.location = @"Riksten";
-    [self.stopViewControllers addObject:test1];
-    // And add to pageview
-    [self.pageViewController setViewControllers:@[test1] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    // Load stop locations from persistent storage and init pageviews for them
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *stops = [defaults objectForKey:@"stops"];
+    for (NSString *stop in stops) {
+        RealtimeStopViewController *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
+        stopVC.location = stop;
+        [self.stopViewControllers addObject:stopVC];
+    }
+    
+    // Start pageviewcontroller with first stopviewcontroller
+    if ([self.stopViewControllers count]) {
+        [self.pageViewController setViewControllers:@[[self.stopViewControllers firstObject]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    }
     
     // Add pageview to view
     self.pageViewController.view.frame = self.view.frame;
@@ -125,6 +132,14 @@
     [self.view addSubview:self.pageViewController.view];
     
     self.removeStopButton.enabled = YES;
+    
+    // Write to persistent storage
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *stops = [[defaults arrayForKey:@"stops"] mutableCopy];
+    if (!stops) stops = [[NSMutableArray alloc] init];
+    [stops addObject:stopName];
+    [defaults setObject:stops forKey:@"stops"];
+    [defaults synchronize];
 }
 
 #pragma mark - Actions
@@ -148,6 +163,13 @@
         } else {
             [self.pageViewController setViewControllers:@[self.stopViewControllers[index]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
         }
+        
+        // Write to persistent storage
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSMutableArray *stops = [[defaults arrayForKey:@"stops"] mutableCopy];
+        [stops removeObject:currentVC.location];
+        [defaults setObject:stops forKey:@"stops"];
+        [defaults synchronize];
     }];
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Avbryt" style:UIAlertActionStyleCancel handler:nil];
     
