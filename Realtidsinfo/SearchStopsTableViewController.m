@@ -8,6 +8,8 @@
 
 #import "SearchStopsTableViewController.h"
 #import "TrafiklabAPI.h"
+#import "LeftAndRightTableViewCell.h"
+#import "Regexer.h"
 
 @interface SearchStopsTableViewController ()
 @property (strong, nonatomic) TrafiklabAPI *API;
@@ -110,20 +112,41 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"stopResult" forIndexPath:indexPath];
+    NSString *stopName;
     
-    // Use different looking cells depending on search result or location result
     // If search is active:
     if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"searchResult" forIndexPath:indexPath];
-        cell.textLabel.text = self.searchResults[indexPath.row][@"Name"];
+        stopName = self.searchResults[indexPath.row][@"Name"];
+        ((LeftAndRightTableViewCell *)cell).rightTextLabel.text = @"";
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"locationResult" forIndexPath:indexPath];
-        cell.textLabel.text = self.locationResults[indexPath.row][@"name"];
-        cell.detailTextLabel.text = [self.locationResults[indexPath.row][@"dist"] stringByAppendingString:@"m"];
+        stopName = self.locationResults[indexPath.row][@"name"];
+        ((LeftAndRightTableViewCell *)cell).rightTextLabel.text = [self.locationResults[indexPath.row][@"dist"] stringByAppendingString:@"m"];
+    }
+    
+    // If the stopname ends with a name of the area in parentheses, extract it and show in detailLabel of cell.
+    NSArray *matches = [self splitIntoLocationAndAreaNames:stopName];
+    if (matches) {
+        cell.textLabel.text = [matches[1] text];
+        cell.detailTextLabel.text = [matches[2] text];
+    } else {
+        cell.textLabel.text = stopName;
+        cell.detailTextLabel.text = @"";
     }
     
     return cell;
+}
+
+// Returns an array of the name split into stopname and areaname if areaname is present, otherwise nil
+// TODO: Make this better and cleaner. 
+- (NSArray *)splitIntoLocationAndAreaNames:(NSString *)stopName {
+    NSString *pattern = @"(.+)\\(([\\w\\s]+)\\)";
+    NSArray *matches = [stopName rx_matchesWithPattern:pattern];
+    if (([matches count] == 1) && ([[matches[0] captures] count] == 3)) {
+        return [matches[0] captures];
+    } else {
+        return nil;
+    }
 }
 
 

@@ -8,7 +8,7 @@ target 'Realtidsinfo' do
 
   # Pods for Realtidsinfo
   pod 'AFNetworking', '~> 3.0'
-
+  pod 'Regexer'
 
   target 'RealtidsinfoTests' do
     inherit! :search_paths

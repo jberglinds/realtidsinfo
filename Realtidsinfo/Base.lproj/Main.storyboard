@@ -27,46 +27,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="searchResult" textLabel="Dlc-4T-h9y" style="IBUITableViewCellStyleDefault" id="Z1D-fh-Pcs">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="stopResult" textLabel="Fqe-W1-b1g" detailTextLabel="3DB-rj-o5X" style="IBUITableViewCellStyleSubtitle" id="5AB-e3-kSV" customClass="LeftAndRightTableViewCell">
                                 <rect key="frame" x="0.0" y="28" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z1D-fh-Pcs" id="x2w-7f-UAB">
-                                    <rect key="frame" x="0.0" y="0.0" width="507" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dlc-4T-h9y">
-                                            <rect key="frame" x="15" y="0.0" width="490" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="locationResult" textLabel="Fqe-W1-b1g" detailTextLabel="3DB-rj-o5X" style="IBUITableViewCellStyleSubtitle" id="5AB-e3-kSV">
-                                <rect key="frame" x="0.0" y="72" width="540" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5AB-e3-kSV" id="snB-us-7at">
-                                    <rect key="frame" x="0.0" y="0.0" width="507" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="507" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Stopname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fqe-W1-b1g">
-                                            <rect key="frame" x="15" y="4" width="78" height="21"/>
+                                            <rect key="frame" x="15" y="5" width="78" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3DB-rj-o5X">
-                                            <rect key="frame" x="15" y="25" width="50" height="15"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Areaname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3DB-rj-o5X">
+                                            <rect key="frame" x="15" y="25.5" width="57" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="100m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zki-uR-Jbc">
+                                            <rect key="frame" x="409" y="11" width="90" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="rightTextLabel" destination="Zki-uR-Jbc" id="igV-FK-ftv"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -88,12 +81,11 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pi9-vH-wIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1253" y="-780"/>
+            <point key="canvasLocation" x="1252.734375" y="-780.46875"/>
         </scene>
         <!--Hållplats-->
         <scene sceneID="3Q4-qw-PQ1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y8x-lz-syO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController title="Hållplats" id="y2M-vV-l2A" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jvu-M5-CLV"/>
@@ -108,6 +100,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Lägg till" id="Pop-z5-3zM"/>
                     </navigationItem>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y8x-lz-syO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1628.90625" y="-780.46875"/>
         </scene>
@@ -182,7 +175,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0tk-OR-MNv">
-                                <rect key="frame" x="272" y="84" width="480" height="180"/>
+                                <rect key="frame" x="272" y="84" width="480" height="179.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BusIcon" translatesAutoresizingMaskIntoConstraints="NO" id="4Wz-Kx-Xnk">
                                         <rect key="frame" x="215" y="0.0" width="50" height="50"/>
@@ -192,13 +185,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Riksten" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiR-c5-8vc">
-                                        <rect key="frame" x="135" y="50" width="210" height="77"/>
+                                        <rect key="frame" x="135" y="50" width="210" height="76.5"/>
                                         <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="64"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="721X mot Tullinge station" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjW-R3-z4R">
-                                        <rect key="frame" x="0.0" y="127" width="480" height="53"/>
+                                        <rect key="frame" x="0.0" y="126.5" width="480" height="53"/>
                                         <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="44"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -206,10 +199,10 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXe-Gg-DIR">
-                                <rect key="frame" x="80" y="318" width="864" height="132"/>
+                                <rect key="frame" x="80" y="318.5" width="864" height="131.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 minuter och 42 sekunder " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv1-u6-Krm">
-                                        <rect key="frame" x="10" y="25" width="844" height="77"/>
+                                        <rect key="frame" x="10" y="25" width="844" height="76.5"/>
                                         <fontDescription key="fontDescription" name="SanFranciscoDisplay-Medium" family="San Francisco Display" pointSize="64"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -224,7 +217,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uppdaterad för 17 sekunder sedan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zpe-Hd-MXP">
-                                <rect key="frame" x="339" y="470" width="347" height="29"/>
+                                <rect key="frame" x="338.5" y="470" width="347" height="29"/>
                                 <fontDescription key="fontDescription" name="SanFranciscoDisplay-Light" family="San Francisco Display" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -259,7 +252,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uZ0-te-h8u" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="kda-zc-Z73">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="kda-zc-Z73">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -278,7 +271,7 @@
                 <navigationController id="Q3s-lS-Ab9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jNa-Re-QAM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jNa-Re-QAM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
