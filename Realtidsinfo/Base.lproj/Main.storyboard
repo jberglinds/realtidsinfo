@@ -76,7 +76,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="y2M-vV-l2A" kind="show" id="bBy-bH-rS5"/>
+                        <segue destination="y2M-vV-l2A" kind="show" identifier="showStopDetails" id="fez-TD-4kX"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pi9-vH-wIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,7 +86,7 @@
         <!--Hållplats-->
         <scene sceneID="3Q4-qw-PQ1">
             <objects>
-                <viewController title="Hållplats" id="y2M-vV-l2A" sceneMemberID="viewController">
+                <viewController title="Hållplats" id="y2M-vV-l2A" customClass="ConfigureStopViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jvu-M5-CLV"/>
                         <viewControllerLayoutGuide type="bottom" id="Z57-E8-v79"/>
@@ -94,11 +94,27 @@
                     <view key="view" contentMode="scaleToFill" id="SQG-HS-dKe">
                         <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRh-QI-g9d">
+                                <rect key="frame" x="0.0" y="44" width="540" height="210"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q34-Io-iBF">
+                                <rect key="frame" x="0.0" y="252" width="540" height="368"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="Rgn-HO-5S4" kind="embed" id="r9g-MP-f0M"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Hållplats" id="rS2-qD-XTN">
                         <barButtonItem key="rightBarButtonItem" title="Lägg till" id="Pop-z5-3zM"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="CRh-QI-g9d" id="FLR-5B-OCg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y8x-lz-syO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -252,7 +268,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uZ0-te-h8u" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="kda-zc-Z73">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="kda-zc-Z73">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -271,7 +287,7 @@
                 <navigationController id="Q3s-lS-Ab9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jNa-Re-QAM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="jNa-Re-QAM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -283,6 +299,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vNE-nl-ngQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="879" y="-780"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="v43-id-yvq">
+            <objects>
+                <tableViewController id="Rgn-HO-5S4" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="JXy-YS-tM8">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="368"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Reseriktning mot" footerTitle="Vid utelämnat val av riktning visas alla avgångar i alla riktningar" id="A3L-SJ-ShS">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" textLabel="nEd-QX-7dQ" style="IBUITableViewCellStyleDefault" id="2fW-Kh-aDb">
+                                        <rect key="frame" x="0.0" y="55.5" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2fW-Kh-aDb" id="9kN-Nx-ICv">
+                                            <rect key="frame" x="0.0" y="0.0" width="501" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Tullinge Station" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nEd-QX-7dQ">
+                                                    <rect key="frame" x="15" y="0.0" width="486" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="LDj-9z-ffQ" style="IBUITableViewCellStyleDefault" id="44a-RL-ipJ">
+                                        <rect key="frame" x="0.0" y="99.5" width="540" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="44a-RL-ipJ" id="zSq-36-0NJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Lida" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LDj-9z-ffQ">
+                                                    <rect key="frame" x="15" y="0.0" width="510" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Rgn-HO-5S4" id="FfH-YS-3Qh"/>
+                            <outlet property="delegate" destination="Rgn-HO-5S4" id="s6O-B3-E8q"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EhM-Ak-6I3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1628.90625" y="-295.3125"/>
         </scene>
     </scenes>
     <resources>

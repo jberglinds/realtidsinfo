@@ -9,6 +9,7 @@
 #import "SearchStopsTableViewController.h"
 #import "TrafiklabAPI.h"
 #import "LeftAndRightTableViewCell.h"
+#import "ConfigureStopViewController.h"
 #import "Regexer.h"
 
 @interface SearchStopsTableViewController ()
@@ -19,6 +20,8 @@
 
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSArray *searchResults;
+
+@property (strong, nonatomic) NSDictionary *stopInfoForSelectedCell;
 @end
 
 @implementation SearchStopsTableViewController 
@@ -62,7 +65,25 @@
     
     // Lookup nearby stops using API and reload table to show results
     [self.API getNearbyStopsForLat:currentLocation.coordinate.latitude Long:currentLocation.coordinate.longitude completion:^(NSDictionary *response) {
-        self.locationResults = response[@"LocationList"][@"StopLocation"];
+        NSMutableArray *results = [[NSMutableArray alloc] init];
+        // Loop over response and insert entries in results array
+        for (NSDictionary *stop in response[@"LocationList"][@"StopLocation"]) {
+            NSArray *splitted = [self splitIntoLocationAndAreaNames:stop[@"name"]];
+            
+            // ID comes prefixed with "30010" for nearby-stops API, removing prefix
+            NSString *stopID = [stop[@"id"] substringFromIndex:5];
+            
+            // Create and add dictionary object to results array
+            [results addObject:@{
+                                 @"id": stopID,
+                                 @"name": splitted[0],
+                                 @"area": splitted[1],
+                                 @"dist": stop[@"dist"],
+                                 @"lat" : stop[@"lat"],
+                                 @"long": stop[@"lon"]
+                                 }];
+        }
+        self.locationResults = [results copy];
         [self.tableView reloadData];
     }];
 }
@@ -79,7 +100,28 @@
     if(![self.searchController.searchBar.text isEqualToString:@""]) {
         // Get results from API and reload table to show them
         [self.API getStopsMatchingString:searchController.searchBar.text completion:^(NSDictionary *response) {
-            self.searchResults = response[@"ResponseData"];
+            NSMutableArray *results = [[NSMutableArray alloc] init];
+            // Loop over response and insert entries in results array
+            for (NSDictionary *stop in response[@"ResponseData"]) {
+                NSArray *splitted = [self splitIntoLocationAndAreaNames:stop[@"Name"]];
+                
+                // Coordinates are missing delimiter for typeahead-api. Insert manually between second and third digits
+                NSMutableString *latitude = [stop[@"Y"] mutableCopy];
+                [latitude insertString:@"." atIndex:2];
+                NSMutableString *longitude = [stop[@"X"] mutableCopy];
+                [longitude insertString:@"." atIndex:2];
+                
+                // Create and add dictionary object to results array
+                [results addObject:@{
+                                     @"id": stop[@"SiteId"],
+                                     @"name": splitted[0],
+                                     @"area": splitted[1],
+                                     @"dist": @"",
+                                     @"lat" : latitude,
+                                     @"long": longitude
+                                     }];
+            }
+            self.searchResults = [results copy];
             [self.tableView reloadData];
         }];
     } else {
@@ -113,58 +155,53 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"stopResult" forIndexPath:indexPath];
-    NSString *stopName;
+    NSDictionary *stopInfo;
     
     // If search is active:
     if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
-        stopName = self.searchResults[indexPath.row][@"Name"];
+        stopInfo = self.searchResults[indexPath.row];
         ((LeftAndRightTableViewCell *)cell).rightTextLabel.text = @"";
     } else {
-        stopName = self.locationResults[indexPath.row][@"name"];
+        stopInfo = self.locationResults[indexPath.row];
         ((LeftAndRightTableViewCell *)cell).rightTextLabel.text = [self.locationResults[indexPath.row][@"dist"] stringByAppendingString:@"m"];
     }
     
-    // If the stopname ends with a name of the area in parentheses, extract it and show in detailLabel of cell.
-    NSArray *matches = [self splitIntoLocationAndAreaNames:stopName];
-    if (matches) {
-        cell.textLabel.text = [matches[1] text];
-        cell.detailTextLabel.text = [matches[2] text];
-    } else {
-        cell.textLabel.text = stopName;
-        cell.detailTextLabel.text = @"";
-    }
+    cell.textLabel.text = stopInfo[@"name"];
+    cell.detailTextLabel.text = stopInfo[@"area"];
     
     return cell;
 }
 
-// Returns an array of the name split into stopname and areaname if areaname is present, otherwise nil
-// TODO: Make this better and cleaner. 
+// Returns an array of the name split into stopname and areaname.
+// Example: "Tullinge Station (Botkyrka)" gets split into ["Tullinge Station", "Botkyrka"]
+// TODO: Make this better and cleaner.
 - (NSArray *)splitIntoLocationAndAreaNames:(NSString *)stopName {
-    NSString *pattern = @"(.+)\\(([\\w\\s]+)\\)";
+    NSString *pattern = @"(.+)\\(([\\w\\s-]+)\\)";
     NSArray *matches = [stopName rx_matchesWithPattern:pattern];
     if (([matches count] == 1) && ([[matches[0] captures] count] == 3)) {
-        return [matches[0] captures];
+        return @[[[matches[0] captures][1] text], [[matches[0] captures][2] text]];
     } else {
-        return nil;
+        return @[stopName, @""];
     }
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.delegate addNewStopWithName:[tableView cellForRowAtIndexPath:indexPath].textLabel.text];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
+        self.stopInfoForSelectedCell = self.searchResults[indexPath.row];
+    } else {
+        self.stopInfoForSelectedCell = self.locationResults[indexPath.row];
+    }
+    [self performSegueWithIdentifier:@"showStopDetails" sender:self];
 }
 
-
-/*
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"showStopDetails"]) {
+        ConfigureStopViewController *destinationVC = [segue destinationViewController];
+        destinationVC.stopInfo = self.stopInfoForSelectedCell;
+    }
 }
-*/
+
 
 #pragma mark - Actions
 - (IBAction)cancelButtonPressed:(UIBarButtonItem *)sender {
