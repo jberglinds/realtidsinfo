@@ -7,21 +7,22 @@
 //
 
 #import "SearchStopsTableViewController.h"
-#import "TrafiklabAPI.h"
 #import "LeftAndRightTableViewCell.h"
-#import "ConfigureStopViewController.h"
+#import "ConfigureStopTableViewController.h"
+#import "TrafiklabAPI.h"
+#import "StopInfo.h"
 #import "Regexer.h"
 
 @interface SearchStopsTableViewController ()
-@property (strong, nonatomic) TrafiklabAPI *API;
+@property (strong, nonatomic) TrafiklabAPI          *API;
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) NSArray *locationResults;
+@property (strong, nonatomic) CLLocationManager     *locationManager;
+@property (strong, nonatomic) NSArray               *locationResults;   // of StopInfo
 
-@property (strong, nonatomic) UISearchController *searchController;
-@property (strong, nonatomic) NSArray *searchResults;
+@property (strong, nonatomic) UISearchController    *searchController;
+@property (strong, nonatomic) NSArray               *searchResults;     // of StopInfo
 
-@property (strong, nonatomic) NSDictionary *stopInfoForSelectedCell;
+@property (strong, nonatomic) StopInfo              *stopInfoForSelectedCell;
 @end
 
 @implementation SearchStopsTableViewController 
@@ -71,17 +72,18 @@
             NSArray *splitted = [self splitIntoLocationAndAreaNames:stop[@"name"]];
             
             // ID comes prefixed with "30010" for nearby-stops API, removing prefix
-            NSString *stopID = [stop[@"id"] substringFromIndex:5];
+            NSInteger stopID = [[stop[@"id"] substringFromIndex:5] integerValue];
             
-            // Create and add dictionary object to results array
-            [results addObject:@{
-                                 @"id": stopID,
-                                 @"name": splitted[0],
-                                 @"area": splitted[1],
-                                 @"dist": stop[@"dist"],
-                                 @"lat" : stop[@"lat"],
-                                 @"long": stop[@"lon"]
-                                 }];
+            // Create StopInfo object and add to results array
+            StopInfo *info = [[StopInfo alloc] init];
+            info.stopID = stopID;
+            info.stopName = splitted[0];
+            info.areaName = splitted[1];
+            info.distance = [stop[@"dist"] integerValue];
+            info.latitude = [stop[@"lat"] floatValue];
+            info.longitude = [stop[@"lon"] floatValue];
+            
+            [results addObject:info];
         }
         self.locationResults = [results copy];
         [self.tableView reloadData];
@@ -111,15 +113,15 @@
                 NSMutableString *longitude = [stop[@"X"] mutableCopy];
                 [longitude insertString:@"." atIndex:2];
                 
-                // Create and add dictionary object to results array
-                [results addObject:@{
-                                     @"id": stop[@"SiteId"],
-                                     @"name": splitted[0],
-                                     @"area": splitted[1],
-                                     @"dist": @"",
-                                     @"lat" : latitude,
-                                     @"long": longitude
-                                     }];
+                // Create StopInfo object and add to results array
+                StopInfo *info = [[StopInfo alloc] init];
+                info.stopID = [stop[@"SiteId"] integerValue];
+                info.stopName = splitted[0];
+                info.areaName = splitted[1];
+                info.latitude = [latitude floatValue],
+                info.longitude = [longitude floatValue];
+                
+                [results addObject:info];
             }
             self.searchResults = [results copy];
             [self.tableView reloadData];
@@ -154,24 +156,39 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"stopResult" forIndexPath:indexPath];
-    NSDictionary *stopInfo;
+    LeftAndRightTableViewCell *cell = (LeftAndRightTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"stopResult" forIndexPath:indexPath];
+    StopInfo *stopInfo;
     
     // If search is active:
     if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
         stopInfo = self.searchResults[indexPath.row];
-        ((LeftAndRightTableViewCell *)cell).rightTextLabel.text = @"";
     } else {
         stopInfo = self.locationResults[indexPath.row];
-        ((LeftAndRightTableViewCell *)cell).rightTextLabel.text = [self.locationResults[indexPath.row][@"dist"] stringByAppendingString:@"m"];
     }
     
-    cell.textLabel.text = stopInfo[@"name"];
-    cell.detailTextLabel.text = stopInfo[@"area"];
+    cell.textLabel.text = stopInfo.stopName;
+    cell.detailTextLabel.text = stopInfo.areaName;
+    
+    if (stopInfo.distance) {
+        cell.rightTextLabel.text = [NSString stringWithFormat:@"%ldm", (long)stopInfo.distance];
+    } else {
+        cell.rightTextLabel.text = @"";
+    }
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // If search is active:
+    if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
+        self.stopInfoForSelectedCell = self.searchResults[indexPath.row];
+    } else {
+        self.stopInfoForSelectedCell = self.locationResults[indexPath.row];
+    }
+    [self performSegueWithIdentifier:@"showStopDetails" sender:self];
+}
+
+#pragma mark - Utility
 // Returns an array of the name split into stopname and areaname.
 // Example: "Tullinge Station (Botkyrka)" gets split into ["Tullinge Station", "Botkyrka"]
 // TODO: Make this better and cleaner.
@@ -185,20 +202,12 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(self.searchController.active && ![self.searchController.searchBar.text isEqualToString:@""]) {
-        self.stopInfoForSelectedCell = self.searchResults[indexPath.row];
-    } else {
-        self.stopInfoForSelectedCell = self.locationResults[indexPath.row];
-    }
-    [self performSegueWithIdentifier:@"showStopDetails" sender:self];
-}
-
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showStopDetails"]) {
-        ConfigureStopViewController *destinationVC = [segue destinationViewController];
-        destinationVC.stopInfo = self.stopInfoForSelectedCell;
+        ConfigureStopTableViewController *destinationVC = [segue destinationViewController];
+        self.stopInfoForSelectedCell.journeyDirection = 1;
+        destinationVC.stop = self.stopInfoForSelectedCell;
     }
 }
 

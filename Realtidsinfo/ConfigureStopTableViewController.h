@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StopInfo.h"
 
-@interface ConfigureStopViewController : UIViewController
+@interface ConfigureStopTableViewController : UITableViewController
 
-@property (strong, nonatomic) NSDictionary *stopInfo;
+@property (strong, nonatomic) StopInfo *stop;
 
 @end

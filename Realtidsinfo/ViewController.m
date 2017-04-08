@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "RealtimeStopViewController.h"
+#import "ConfigureStopTableViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *removeStopButton;
@@ -103,16 +104,13 @@
 }
 
 #pragma mark - Navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Triggered from navbar button
-    if ([segue.identifier isEqualToString:@"addNewStopSegue"]) {
-        UINavigationController *navigationVC = (UINavigationController *)segue.destinationViewController;
-        SearchStopsTableViewController *destinationVC = (SearchStopsTableViewController *)navigationVC.topViewController;
-        destinationVC.delegate = self;
-    }
+- (IBAction)unwindAndSaveSegue:(UIStoryboardSegue *)segue {
+    ConfigureStopTableViewController *sourceVC = [segue sourceViewController];
+    [self addNewStopWithName:sourceVC.stop.stopName];
 }
 
-#pragma mark - SearchStopsTableViewControllerDelegate
+#pragma mark -
+
 - (void)addNewStopWithName:(NSString *)stopName {
     RealtimeStopViewController *newPage = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
     newPage.location = stopName;
