@@ -8,15 +8,11 @@
 
 #import "RealtimeSite.h"
 #import "TrafiklabAPI.h"
+#import "Departure.h"
 
 @interface RealtimeSite()
-@property (nonatomic) NSInteger siteID;
-
-@property (strong, nonatomic, readwrite) NSString *locationName;
-@property (strong, nonatomic, readwrite) NSString *busName;
-@property (strong, nonatomic, readwrite) NSString *busDestination;
-@property (strong, nonatomic, readwrite) NSDate *expectedAt;
 @property (strong, nonatomic, readwrite) NSDate *updatedAt;
+@property (strong, nonatomic, readwrite) NSArray *departures; // of Departure
 
 @property (strong, nonatomic) TrafiklabAPI *API;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
@@ -37,6 +33,11 @@ float const UPDATE_FREQ = 15.0;
     }
     
     return self;
+}
+
+- (NSArray *)departures {
+    if (!_departures) _departures = [[NSArray alloc] init];
+    return _departures;
 }
 
 - (TrafiklabAPI *)API {
@@ -74,19 +75,21 @@ float const UPDATE_FREQ = 15.0;
         // Only update if response has newer update, API is not very good at giving latest at all times.
         if (!self.updatedAt || [latestUpdate timeIntervalSinceDate:self.updatedAt] > 0) {
             self.updatedAt = latestUpdate;
-            // Loop over response until first bus in right direction
+            
+            // Loop over response and add to Departures array, only buses for now.
+            NSMutableArray *departures = [[NSMutableArray alloc] init];
             for (NSDictionary *bus in responseData[@"Buses"]) {
-                if ([bus[@"JourneyDirection"] isEqual: @2]) {
-                    self.locationName = bus[@"StopAreaName"];
-                    self.busName = bus[@"LineNumber"];
-                    self.busDestination = bus[@"Destination"];
-                    self.expectedAt = [self.dateFormatter dateFromString:bus[@"ExpectedDateTime"]];
-                    return;
-                }
+                Departure *departure = [[Departure alloc] init];
+                departure.stopArea = bus[@"StopAreaName"];
+                departure.line = bus[@"LineNumber"];
+                departure.journeyDirection = [bus[@"JourneyDirection"] integerValue];
+                departure.destination = bus[@"Destination"];
+                departure.expectedAt = [self.dateFormatter dateFromString:bus[@"ExpectedDateTime"]];
+                departure.timeTabledAt = [self.dateFormatter dateFromString:bus[@"TimeTabledDateTime"]];
+                [departures addObject:departure];
             }
-            // None found
-            self.busName = @"Inga avgångar";
-            self.expectedAt = nil;
+            // Copy over an immutable copy to public var
+            self.departures = [departures copy];
         }
     }];
 }
