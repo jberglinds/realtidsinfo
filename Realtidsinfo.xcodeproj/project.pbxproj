@@ -27,6 +27,7 @@
 		ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */; };
 		ABBF05F81E938F4700B5FA74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABBF05F71E938F4700B5FA74 /* MapKit.framework */; };
 		ABBF05FB1E9390E700B5FA74 /* ConfigureStopTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBF05FA1E9390E700B5FA74 /* ConfigureStopTableViewController.m */; };
+		ABE5614F1E9D09B500891698 /* Departure.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE5614E1E9D09B500891698 /* Departure.m */; };
 		ABE73DD21E8C08A400C70E13 /* SearchStopsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */; };
 		ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */; };
 		B2A33C096D774D41927ABA0A /* libPods-RealtidsinfoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6F694AD004BDEE85784314 /* libPods-RealtidsinfoUITests.a */; };
@@ -91,6 +92,8 @@
 		ABBF05F71E938F4700B5FA74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		ABBF05F91E9390E700B5FA74 /* ConfigureStopTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureStopTableViewController.h; sourceTree = "<group>"; };
 		ABBF05FA1E9390E700B5FA74 /* ConfigureStopTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureStopTableViewController.m; sourceTree = "<group>"; };
+		ABE5614D1E9D09B500891698 /* Departure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Departure.h; path = Model/Departure.h; sourceTree = "<group>"; };
+		ABE5614E1E9D09B500891698 /* Departure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Departure.m; path = Model/Departure.m; sourceTree = "<group>"; };
 		ABE73DD01E8C08A400C70E13 /* SearchStopsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchStopsTableViewController.h; sourceTree = "<group>"; };
 		ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchStopsTableViewController.m; sourceTree = "<group>"; };
 		ABE73DD31E8C351100C70E13 /* TrafiklabAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrafiklabAPI.h; path = Model/TrafiklabAPI.h; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 				AB5FBA6D1E643AE1009ACA2F /* API-keys.plist */,
 				AB5FBA6F1E647A7E009ACA2F /* RealtimeSite.h */,
 				AB5FBA701E647A7E009ACA2F /* RealtimeSite.m */,
+				ABE5614D1E9D09B500891698 /* Departure.h */,
+				ABE5614E1E9D09B500891698 /* Departure.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -541,6 +546,7 @@
 				AB5FBA711E647A7E009ACA2F /* RealtimeSite.m in Sources */,
 				ABBF05FB1E9390E700B5FA74 /* ConfigureStopTableViewController.m in Sources */,
 				AB9B5C441E60C0B700BC51AE /* AppDelegate.m in Sources */,
+				ABE5614F1E9D09B500891698 /* Departure.m in Sources */,
 				AB9B5C411E60C0B700BC51AE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

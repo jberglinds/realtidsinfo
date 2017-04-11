@@ -10,7 +10,9 @@
 
 @interface RealtimeStopViewController : UIViewController
 
-@property (strong, nonatomic) NSString *location;
+@property (nonatomic) NSInteger stopID;
+@property (nonatomic) NSInteger journeyDirection;
+@property (strong, nonatomic) NSString *locationName;
 
 @end
 

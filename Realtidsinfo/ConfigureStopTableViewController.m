@@ -27,10 +27,6 @@
     // Do any additional setup after loading the view.
     self.title = self.stop.stopName;
     
-    // Set checkmarks to match journeydirection
-    if (self.stop.journeyDirection == 1) self.firstDirectionSelectionCell.accessoryType = UITableViewCellAccessoryCheckmark;
-    if (self.stop.journeyDirection == 2) self.secondDirectionSelectionCell.accessoryType = UITableViewCellAccessoryCheckmark;
-    
     // Create pin on map with stop location and name
     MKPointAnnotation *pin = [[MKPointAnnotation alloc] init];
     pin.coordinate = CLLocationCoordinate2DMake(self.stop.latitude, self.stop.longitude);
@@ -87,5 +83,15 @@
     return _API;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Set journeydirection depending on which cells has checkmarks
+    if (self.firstDirectionSelectionCell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        if (self.secondDirectionSelectionCell.accessoryType != UITableViewCellAccessoryCheckmark) {
+            self.stop.journeyDirection = 1;
+        }
+    } else if (self.secondDirectionSelectionCell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        self.stop.journeyDirection = 2;
+    }
+}
 
 @end

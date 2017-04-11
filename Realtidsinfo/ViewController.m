@@ -34,10 +34,11 @@
     
     // Load stop locations from persistent storage and init pageviews for them
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *stops = [defaults objectForKey:@"stops"];
-    for (NSString *stop in stops) {
+    for (NSDictionary *stop in [defaults objectForKey:@"stops"]) {
         RealtimeStopViewController *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
-        stopVC.location = stop;
+        stopVC.locationName = stop[@"name"];
+        stopVC.stopID = [stop[@"id"] integerValue];
+        stopVC.journeyDirection = [stop[@"direction"] integerValue];
         [self.stopViewControllers addObject:stopVC];
     }
     
@@ -106,23 +107,26 @@
 #pragma mark - Navigation
 - (IBAction)unwindAndSaveSegue:(UIStoryboardSegue *)segue {
     ConfigureStopTableViewController *sourceVC = [segue sourceViewController];
-    [self addNewStopWithName:sourceVC.stop.stopName];
+    StopInfo *stop = sourceVC.stop;
+    [self addNewStopWithID:stop.stopID andName:stop.stopName withDirection:stop.journeyDirection];
 }
 
 #pragma mark -
 
-- (void)addNewStopWithName:(NSString *)stopName {
-    RealtimeStopViewController *newPage = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
-    newPage.location = stopName;
-    [self.stopViewControllers addObject:newPage];
+- (void)addNewStopWithID:(NSInteger)stopID andName:(NSString *)stopName withDirection:(NSInteger)journeyDirection {
+    RealtimeStopViewController *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
+    stopVC.stopID = stopID;
+    stopVC.locationName = stopName;
+    stopVC.journeyDirection = journeyDirection;
+    [self.stopViewControllers addObject:stopVC];
     
     // Due to bug in UIPageViewController which causes it to use cached pages that should have been removed.
     // Bug only present when using animation so we disable it for the first page to clear cache.
     // http://stackoverflow.com/questions/14220289/removing-a-view-controller-from-uipageviewcontroller#17330606
     if ([self.stopViewControllers count] == 1) {
-        [self.pageViewController setViewControllers:@[newPage] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        [self.pageViewController setViewControllers:@[stopVC] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     } else {
-        [self.pageViewController setViewControllers:@[newPage] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [self.pageViewController setViewControllers:@[stopVC] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     }
     
     // Always add pageviewcontroller to view. Might have been removed by removeButtonPressed if empty.
@@ -135,7 +139,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *stops = [[defaults arrayForKey:@"stops"] mutableCopy];
     if (!stops) stops = [[NSMutableArray alloc] init];
-    [stops addObject:stopName];
+    [stops addObject:@{
+                        @"name": stopName,
+                        @"id": @(stopID),
+                        @"direction": @(journeyDirection)
+                       }];
     [defaults setObject:stops forKey:@"stops"];
     [defaults synchronize];
 }
@@ -165,7 +173,7 @@
         // Write to persistent storage
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSMutableArray *stops = [[defaults arrayForKey:@"stops"] mutableCopy];
-        [stops removeObject:currentVC.location];
+        [stops removeObjectAtIndex:index];
         [defaults setObject:stops forKey:@"stops"];
         [defaults synchronize];
     }];

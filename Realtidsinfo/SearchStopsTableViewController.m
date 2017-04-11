@@ -206,7 +206,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showStopDetails"]) {
         ConfigureStopTableViewController *destinationVC = [segue destinationViewController];
-        self.stopInfoForSelectedCell.journeyDirection = 1;
         destinationVC.stop = self.stopInfoForSelectedCell;
     }
 }

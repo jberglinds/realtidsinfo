@@ -9,6 +9,7 @@
 #import "RealtimeStopViewController.h"
 #import "RealtimeSite.h"
 #import "TrafiklabAPI.h"
+#import "Departure.h"
 
 @interface RealtimeStopViewController ()
 @property (strong, nonatomic) TrafiklabAPI *API;
@@ -28,11 +29,16 @@
 #pragma mark - UIViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    self.locationLabel.text = self.locationName;
     
-    [self setup];
+    // Create Realtime object and start updates
+    self.site = [[RealtimeSite alloc] initWithSiteID:self.stopID];
+    [self.site startUpdates];
+    [self updateUI];
+    
     // Add border around countdown view, only for the looks.
-    self.countdownView.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.countdownView.layer.borderColor = UIColor.whiteColor.CGColor;
     self.countdownView.layer.borderWidth = 10;
 }
 
@@ -65,33 +71,37 @@
     return _API;
 }
 
-- (void)setup {
-    // Get siteid from API using location string and create RealtimeSite object (model)
-    [self.API getStopsMatchingString:self.location completion:^(NSDictionary *response) {
-        if (response) {
-            NSDictionary *firstHit = response[@"ResponseData"][0];
-            NSInteger siteID = [firstHit[@"SiteId"] integerValue];
-            self.site = [[RealtimeSite alloc] initWithSiteID:siteID];
-            [self.site startUpdates];
-        }
-    }];
-}
 
 #pragma mark - UI Updates
 - (void)updateUI {
-    self.locationLabel.text = self.site.locationName;
-    
-    double timeLeft = [self.site.expectedAt timeIntervalSinceNow];
-    if (timeLeft > 0) {
-        self.countdownLabel.text = [NSString stringWithFormat:@"%d minuter och %d sekunder", [self getMinutesFromInterval:timeLeft], [self getSecondsFromInterval:timeLeft]];
-    } else {
-        self.countdownLabel.text = @"Nu";
+    Departure *nextDeparture = nil;
+    for (Departure *departure in self.site.departures) {
+        if (!self.journeyDirection || departure.journeyDirection == self.journeyDirection) {
+            nextDeparture = departure;
+            break;
+        }
     }
     
-    self.busLabel.text = [NSString stringWithFormat:@"%@ mot %@", self.site.busName, self.site.busDestination];
-    self.lastUpdatedLabel.text = [NSString stringWithFormat:@"Uppdaterad för %d sekunder sedan", (int)-[self.site.updatedAt timeIntervalSinceNow]];
+    if (nextDeparture) {
+        self.locationLabel.text = nextDeparture.stopArea;
+        self.busLabel.text = [NSString stringWithFormat:@"%@ mot %@", nextDeparture.line, nextDeparture.destination];
+        
+        double timeLeft = [nextDeparture.expectedAt timeIntervalSinceNow];
+        if (timeLeft > 0) {
+            self.countdownLabel.text = [NSString stringWithFormat:@"%d minuter och %d sekunder", [self getMinutesFromInterval:timeLeft], [self getSecondsFromInterval:timeLeft]];
+        } else {
+            self.countdownLabel.text = @"Nu";
+        }
+        
+        [self updateBackgroundToTimeLeft:timeLeft];
+    } else {
+        self.locationLabel.text = self.locationName;
+        self.busLabel.text = @"";
+        self.countdownLabel.text = @"Inga avgångar";
+        self.view.backgroundColor = [UIColor grayColor];
+    }
     
-    [self updateBackgroundToTimeLeft:timeLeft];
+    self.lastUpdatedLabel.text = [NSString stringWithFormat:@"Uppdaterad för %d sekunder sedan", (int)-[self.site.updatedAt timeIntervalSinceNow]];
 }
 
 // Set different background colors for view depending on time left to departure

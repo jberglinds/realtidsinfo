@@ -11,7 +11,7 @@
 
 @interface StopInfo : NSObject
 
-@property (nonatomic)   NSInteger   stopID;
+@property (nonatomic)           NSInteger   stopID;
 @property (strong, nonatomic)   NSString    *stopName;
 @property (strong, nonatomic)   NSString    *areaName;
 @property (nonatomic)           NSInteger   journeyDirection;
