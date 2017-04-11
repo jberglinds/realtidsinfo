@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "StopInfo.h"
 
-@interface ConfigureStopTableViewController : UITableViewController
+@interface ConfigureStopView : UITableViewController
 
 @property (strong, nonatomic) StopInfo *stop;
 

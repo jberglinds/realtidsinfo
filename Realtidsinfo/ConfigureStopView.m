@@ -6,11 +6,11 @@
 //  Copyright © 2017 Jonathan Berglind. All rights reserved.
 //
 
-#import "ConfigureStopTableViewController.h"
+#import "ConfigureStopView.h"
 #import <MapKit/MapKit.h>
 #import "TrafiklabAPI.h"
 
-@interface ConfigureStopTableViewController ()
+@interface ConfigureStopView ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UITableViewCell *firstDirectionSelectionCell;
 @property (weak, nonatomic) IBOutlet UITableViewCell *secondDirectionSelectionCell;
@@ -19,7 +19,7 @@
 @property (strong, nonatomic) TrafiklabAPI    *API;
 @end
 
-@implementation ConfigureStopTableViewController
+@implementation ConfigureStopView
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {

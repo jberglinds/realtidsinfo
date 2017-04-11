@@ -6,17 +6,17 @@
 //  Copyright © 2017 Jonathan Berglind. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "RealtimeStopViewController.h"
-#import "ConfigureStopTableViewController.h"
+#import "MainView.h"
+#import "RealtimeStopView.h"
+#import "ConfigureStopView.h"
 
-@interface ViewController ()
+@interface MainView ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *removeStopButton;
 @property (strong, nonatomic) UIPageViewController *pageViewController;
-@property (strong, nonatomic) NSMutableArray *stopViewControllers; // of RealtimeStopViewController
+@property (strong, nonatomic) NSMutableArray *stopViewControllers; // of RealtimeStopView
 @end
 
-@implementation ViewController
+@implementation MainView
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {
@@ -27,7 +27,7 @@
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     
-    // Set up pageview controller that will hold all the RealtimeStopViewControllers
+    // Set up pageview controller that will hold all the RealtimeStopViews
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimePageViewController"];
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
@@ -35,7 +35,7 @@
     // Load stop locations from persistent storage and init pageviews for them
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     for (NSDictionary *stop in [defaults objectForKey:@"stops"]) {
-        RealtimeStopViewController *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
+        RealtimeStopView *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopView"];
         stopVC.locationName = stop[@"name"];
         stopVC.stopID = [stop[@"id"] integerValue];
         stopVC.journeyDirection = [stop[@"direction"] integerValue];
@@ -106,7 +106,7 @@
 
 #pragma mark - Navigation
 - (IBAction)unwindAndSaveSegue:(UIStoryboardSegue *)segue {
-    ConfigureStopTableViewController *sourceVC = [segue sourceViewController];
+    ConfigureStopView *sourceVC = [segue sourceViewController];
     StopInfo *stop = sourceVC.stop;
     [self addNewStopWithID:stop.stopID andName:stop.stopName withDirection:stop.journeyDirection];
 }
@@ -114,7 +114,7 @@
 #pragma mark -
 
 - (void)addNewStopWithID:(NSInteger)stopID andName:(NSString *)stopName withDirection:(NSInteger)journeyDirection {
-    RealtimeStopViewController *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopViewController"];
+    RealtimeStopView *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopView"];
     stopVC.stopID = stopID;
     stopVC.locationName = stopName;
     stopVC.journeyDirection = journeyDirection;
@@ -155,7 +155,7 @@
     
     UIAlertAction *actionConfirm = [UIAlertAction actionWithTitle:@"Ta bort" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         // Remove from array with controllers for pageview
-        RealtimeStopViewController *currentVC = [self.pageViewController.viewControllers firstObject];
+        RealtimeStopView *currentVC = [self.pageViewController.viewControllers firstObject];
         NSInteger index = [self.stopViewControllers indexOfObject:currentVC];
         [self.stopViewControllers removeObject:currentVC];
         

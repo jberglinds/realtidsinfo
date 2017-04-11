@@ -14,10 +14,10 @@
 		AB602E611E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = AB602E601E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.m */; };
 		AB652B2C1E9946680059E24B /* StopInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AB652B2B1E9946680059E24B /* StopInfo.m */; };
 		AB7690241E92E8D300916024 /* LeftAndRightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB7690231E92E8D300916024 /* LeftAndRightTableViewCell.m */; };
-		AB85C8F01E6B264100D9181E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB85C8EF1E6B264100D9181E /* ViewController.m */; };
+		AB85C8F01E6B264100D9181E /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB85C8EF1E6B264100D9181E /* MainView.m */; };
 		AB9B5C411E60C0B700BC51AE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C401E60C0B700BC51AE /* main.m */; };
 		AB9B5C441E60C0B700BC51AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C431E60C0B700BC51AE /* AppDelegate.m */; };
-		AB9B5C471E60C0B800BC51AE /* RealtimeStopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C461E60C0B800BC51AE /* RealtimeStopViewController.m */; };
+		AB9B5C471E60C0B800BC51AE /* RealtimeStopView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB9B5C461E60C0B800BC51AE /* RealtimeStopView.m */; };
 		AB9B5C4A1E60C0B800BC51AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9B5C481E60C0B800BC51AE /* Main.storyboard */; };
 		AB9B5C4C1E60C0B800BC51AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB9B5C4B1E60C0B800BC51AE /* Assets.xcassets */; };
 		AB9B5C4F1E60C0B800BC51AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB9B5C4D1E60C0B800BC51AE /* LaunchScreen.storyboard */; };
@@ -26,9 +26,9 @@
 		ABBDD3FA1E66F4370077B07C /* SanFranciscoDisplay-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF771E66F1BF00E297AF /* SanFranciscoDisplay-Medium.otf */; };
 		ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */; };
 		ABBF05F81E938F4700B5FA74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABBF05F71E938F4700B5FA74 /* MapKit.framework */; };
-		ABBF05FB1E9390E700B5FA74 /* ConfigureStopTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBF05FA1E9390E700B5FA74 /* ConfigureStopTableViewController.m */; };
+		ABBF05FB1E9390E700B5FA74 /* ConfigureStopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBF05FA1E9390E700B5FA74 /* ConfigureStopView.m */; };
 		ABE5614F1E9D09B500891698 /* Departure.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE5614E1E9D09B500891698 /* Departure.m */; };
-		ABE73DD21E8C08A400C70E13 /* SearchStopsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */; };
+		ABE73DD21E8C08A400C70E13 /* SearchStopsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD11E8C08A400C70E13 /* SearchStopsView.m */; };
 		ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */; };
 		B2A33C096D774D41927ABA0A /* libPods-RealtidsinfoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6F694AD004BDEE85784314 /* libPods-RealtidsinfoUITests.a */; };
 /* End PBXBuildFile section */
@@ -71,14 +71,14 @@
 		AB652B2B1E9946680059E24B /* StopInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StopInfo.m; path = Model/StopInfo.m; sourceTree = "<group>"; };
 		AB7690221E92E8D300916024 /* LeftAndRightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftAndRightTableViewCell.h; sourceTree = "<group>"; };
 		AB7690231E92E8D300916024 /* LeftAndRightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftAndRightTableViewCell.m; sourceTree = "<group>"; };
-		AB85C8EE1E6B264100D9181E /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AB85C8EF1E6B264100D9181E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AB85C8EE1E6B264100D9181E /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
+		AB85C8EF1E6B264100D9181E /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		AB9B5C3C1E60C0B700BC51AE /* Realtidsinfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Realtidsinfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB9B5C401E60C0B700BC51AE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AB9B5C421E60C0B700BC51AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AB9B5C431E60C0B700BC51AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AB9B5C451E60C0B800BC51AE /* RealtimeStopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RealtimeStopViewController.h; sourceTree = "<group>"; };
-		AB9B5C461E60C0B800BC51AE /* RealtimeStopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealtimeStopViewController.m; sourceTree = "<group>"; };
+		AB9B5C451E60C0B800BC51AE /* RealtimeStopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RealtimeStopView.h; sourceTree = "<group>"; };
+		AB9B5C461E60C0B800BC51AE /* RealtimeStopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealtimeStopView.m; sourceTree = "<group>"; };
 		AB9B5C491E60C0B800BC51AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB9B5C4B1E60C0B800BC51AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB9B5C4E1E60C0B800BC51AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -90,12 +90,12 @@
 		AB9B5C641E60C0B800BC51AE /* RealtidsinfoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealtidsinfoUITests.m; sourceTree = "<group>"; };
 		AB9B5C661E60C0B800BC51AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABBF05F71E938F4700B5FA74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		ABBF05F91E9390E700B5FA74 /* ConfigureStopTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureStopTableViewController.h; sourceTree = "<group>"; };
-		ABBF05FA1E9390E700B5FA74 /* ConfigureStopTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureStopTableViewController.m; sourceTree = "<group>"; };
+		ABBF05F91E9390E700B5FA74 /* ConfigureStopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureStopView.h; sourceTree = "<group>"; };
+		ABBF05FA1E9390E700B5FA74 /* ConfigureStopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureStopView.m; sourceTree = "<group>"; };
 		ABE5614D1E9D09B500891698 /* Departure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Departure.h; path = Model/Departure.h; sourceTree = "<group>"; };
 		ABE5614E1E9D09B500891698 /* Departure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Departure.m; path = Model/Departure.m; sourceTree = "<group>"; };
-		ABE73DD01E8C08A400C70E13 /* SearchStopsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchStopsTableViewController.h; sourceTree = "<group>"; };
-		ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchStopsTableViewController.m; sourceTree = "<group>"; };
+		ABE73DD01E8C08A400C70E13 /* SearchStopsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchStopsView.h; sourceTree = "<group>"; };
+		ABE73DD11E8C08A400C70E13 /* SearchStopsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchStopsView.m; sourceTree = "<group>"; };
 		ABE73DD31E8C351100C70E13 /* TrafiklabAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrafiklabAPI.h; path = Model/TrafiklabAPI.h; sourceTree = "<group>"; };
 		ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrafiklabAPI.m; path = Model/TrafiklabAPI.m; sourceTree = "<group>"; };
 		ABE73DD61E8D361600C70E13 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -197,19 +197,16 @@
 		AB9B5C3E1E60C0B700BC51AE /* Realtidsinfo */ = {
 			isa = PBXGroup;
 			children = (
-				AB85C8EE1E6B264100D9181E /* ViewController.h */,
-				AB85C8EF1E6B264100D9181E /* ViewController.m */,
-				AB9B5C451E60C0B800BC51AE /* RealtimeStopViewController.h */,
-				AB9B5C461E60C0B800BC51AE /* RealtimeStopViewController.m */,
-				AB602E5F1E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.h */,
-				AB602E601E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.m */,
 				AB9B5C481E60C0B800BC51AE /* Main.storyboard */,
-				ABBF05F91E9390E700B5FA74 /* ConfigureStopTableViewController.h */,
-				ABBF05FA1E9390E700B5FA74 /* ConfigureStopTableViewController.m */,
-				AB7690221E92E8D300916024 /* LeftAndRightTableViewCell.h */,
-				AB7690231E92E8D300916024 /* LeftAndRightTableViewCell.m */,
-				ABE73DD01E8C08A400C70E13 /* SearchStopsTableViewController.h */,
-				ABE73DD11E8C08A400C70E13 /* SearchStopsTableViewController.m */,
+				AB85C8EE1E6B264100D9181E /* MainView.h */,
+				AB85C8EF1E6B264100D9181E /* MainView.m */,
+				AB9B5C451E60C0B800BC51AE /* RealtimeStopView.h */,
+				AB9B5C461E60C0B800BC51AE /* RealtimeStopView.m */,
+				ABBF05F91E9390E700B5FA74 /* ConfigureStopView.h */,
+				ABBF05FA1E9390E700B5FA74 /* ConfigureStopView.m */,
+				ABE73DD01E8C08A400C70E13 /* SearchStopsView.h */,
+				ABE73DD11E8C08A400C70E13 /* SearchStopsView.m */,
+				ABC01CC81E9D603900305877 /* Supporting Views */,
 				AB9B5C4D1E60C0B800BC51AE /* LaunchScreen.storyboard */,
 				AB9B5C501E60C0B800BC51AE /* Info.plist */,
 				AB9B5C4B1E60C0B800BC51AE /* Assets.xcassets */,
@@ -248,6 +245,17 @@
 				AB9B5C661E60C0B800BC51AE /* Info.plist */,
 			);
 			path = RealtidsinfoUITests;
+			sourceTree = "<group>";
+		};
+		ABC01CC81E9D603900305877 /* Supporting Views */ = {
+			isa = PBXGroup;
+			children = (
+				AB602E5F1E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.h */,
+				AB602E601E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.m */,
+				AB7690221E92E8D300916024 /* LeftAndRightTableViewCell.h */,
+				AB7690231E92E8D300916024 /* LeftAndRightTableViewCell.m */,
+			);
+			name = "Supporting Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -536,15 +544,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB85C8F01E6B264100D9181E /* ViewController.m in Sources */,
+				AB85C8F01E6B264100D9181E /* MainView.m in Sources */,
 				AB7690241E92E8D300916024 /* LeftAndRightTableViewCell.m in Sources */,
-				AB9B5C471E60C0B800BC51AE /* RealtimeStopViewController.m in Sources */,
-				ABE73DD21E8C08A400C70E13 /* SearchStopsTableViewController.m in Sources */,
+				AB9B5C471E60C0B800BC51AE /* RealtimeStopView.m in Sources */,
+				ABE73DD21E8C08A400C70E13 /* SearchStopsView.m in Sources */,
 				ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */,
 				AB652B2C1E9946680059E24B /* StopInfo.m in Sources */,
 				AB602E611E6C2B33002B330C /* UIPageViewControllerWithOverlayIndicator.m in Sources */,
 				AB5FBA711E647A7E009ACA2F /* RealtimeSite.m in Sources */,
-				ABBF05FB1E9390E700B5FA74 /* ConfigureStopTableViewController.m in Sources */,
+				ABBF05FB1E9390E700B5FA74 /* ConfigureStopView.m in Sources */,
 				AB9B5C441E60C0B700BC51AE /* AppDelegate.m in Sources */,
 				ABE5614F1E9D09B500891698 /* Departure.m in Sources */,
 				AB9B5C411E60C0B700BC51AE /* main.m in Sources */,

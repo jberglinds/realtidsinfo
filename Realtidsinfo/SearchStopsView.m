@@ -6,14 +6,14 @@
 //  Copyright © 2017 Jonathan Berglind. All rights reserved.
 //
 
-#import "SearchStopsTableViewController.h"
+#import "SearchStopsView.h"
 #import "LeftAndRightTableViewCell.h"
-#import "ConfigureStopTableViewController.h"
+#import "ConfigureStopView.h"
 #import "TrafiklabAPI.h"
 #import "StopInfo.h"
 #import "Regexer.h"
 
-@interface SearchStopsTableViewController ()
+@interface SearchStopsView ()
 @property (strong, nonatomic) TrafiklabAPI          *API;
 
 @property (strong, nonatomic) CLLocationManager     *locationManager;
@@ -25,7 +25,7 @@
 @property (strong, nonatomic) StopInfo              *stopInfoForSelectedCell;
 @end
 
-@implementation SearchStopsTableViewController 
+@implementation SearchStopsView 
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {
@@ -205,7 +205,7 @@
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showStopDetails"]) {
-        ConfigureStopTableViewController *destinationVC = [segue destinationViewController];
+        ConfigureStopView *destinationVC = [segue destinationViewController];
         destinationVC.stop = self.stopInfoForSelectedCell;
     }
 }

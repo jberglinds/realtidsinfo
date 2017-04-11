@@ -6,12 +6,12 @@
 //  Copyright © 2017 Jonathan Berglind. All rights reserved.
 //
 
-#import "RealtimeStopViewController.h"
+#import "RealtimeStopView.h"
 #import "RealtimeSite.h"
 #import "TrafiklabAPI.h"
 #import "Departure.h"
 
-@interface RealtimeStopViewController ()
+@interface RealtimeStopView ()
 @property (strong, nonatomic) TrafiklabAPI *API;
 
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
@@ -24,7 +24,7 @@
 @property (strong, nonatomic) NSTimer *UIUpdateTimer;
 @end
 
-@implementation RealtimeStopViewController
+@implementation RealtimeStopView
 
 #pragma mark - UIViewController
 - (void)viewDidLoad {

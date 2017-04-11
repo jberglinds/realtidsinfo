@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RealtimeStopViewController : UIViewController
+@interface RealtimeStopView : UIViewController
 
 @property (nonatomic) NSInteger stopID;
 @property (nonatomic) NSInteger journeyDirection;
