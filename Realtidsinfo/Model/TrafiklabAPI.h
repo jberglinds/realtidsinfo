@@ -12,10 +12,10 @@
 
 - (instancetype)init;
 
-- (void)getStopsMatchingString:(NSString *)searchString completion:(void(^)(NSDictionary *))completion;
+- (void)getStopsMatchingString:(NSString *)searchString completion:(void (^)(NSDictionary *))completion;
 
-- (void)getRealtimeForStop:(NSInteger)siteID completion:(void(^)(NSDictionary *))completion;
+- (void)getRealtimeForStop:(NSInteger)siteID completion:(void (^)(NSDictionary *))completion;
 
-- (void)getNearbyStopsForLat:(float)latitude Long:(float)longitude completion:(void(^)(NSDictionary *))completion;
+- (void)getNearbyStopsForLat:(float)latitude Long:(float)longitude completion:(void (^)(NSDictionary *))completion;
 
 @end
