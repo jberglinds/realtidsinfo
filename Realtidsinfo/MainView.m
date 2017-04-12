@@ -11,9 +11,9 @@
 #import "ConfigureStopView.h"
 
 @interface MainView ()
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *removeStopButton;
-@property (strong, nonatomic) UIPageViewController *pageViewController;
-@property (strong, nonatomic) NSMutableArray *stopViewControllers; // of RealtimeStopView
+@property (weak, nonatomic) IBOutlet UIBarButtonItem      *removeStopButton;
+@property (strong, nonatomic)        UIPageViewController *pageViewController;
+@property (strong, nonatomic)        NSMutableArray       *stopViewControllers; // of RealtimeStopView
 @end
 
 @implementation MainView
@@ -24,7 +24,8 @@
     // Do any additional setup after loading the view.
     
     // Set navbar to be transparent
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     
     // Set up pageview controller that will hold all the RealtimeStopViews
@@ -33,18 +34,14 @@
     self.pageViewController.delegate = self;
     
     // Load stop locations from persistent storage and init pageviews for them
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    for (NSDictionary *stop in [defaults objectForKey:@"stops"]) {
-        RealtimeStopView *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopView"];
-        stopVC.locationName = stop[@"name"];
-        stopVC.stopID = [stop[@"id"] integerValue];
-        stopVC.journeyDirection = [stop[@"direction"] integerValue];
-        [self.stopViewControllers addObject:stopVC];
-    }
+    [self loadStopsFromDefaults];
     
     // Start pageviewcontroller with first stopviewcontroller
     if ([self.stopViewControllers count]) {
-        [self.pageViewController setViewControllers:@[[self.stopViewControllers firstObject]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [self.pageViewController setViewControllers:@[[self.stopViewControllers firstObject]]
+                                          direction:UIPageViewControllerNavigationDirectionForward
+                                           animated:YES
+                                         completion:nil];
     }
     
     // Add pageview to view
@@ -69,6 +66,40 @@
 - (NSMutableArray *)stopViewControllers {
     if (!_stopViewControllers) _stopViewControllers = [[NSMutableArray alloc] init];
     return _stopViewControllers;
+}
+
+#pragma mark - NSUserDefaults
+- (void)loadStopsFromDefaults {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    for (NSDictionary *stop in [defaults objectForKey:@"stops"]) {
+        RealtimeStopView *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopView"];
+        stopVC.locationName      = stop[@"name"];
+        stopVC.stopID            = [stop[@"id"] integerValue];
+        stopVC.journeyDirection  = [stop[@"direction"] integerValue];
+        [self.stopViewControllers addObject:stopVC];
+    }
+}
+
+- (void)addStopToDefaultsWithName:(NSString *)stopName andID:(NSNumber *)stopID andDirection:(NSNumber *)journeyDirection {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *stops    = [[defaults arrayForKey:@"stops"] mutableCopy];
+    // Create object if nil
+    if (!stops) stops = [[NSMutableArray alloc] init];
+    [stops addObject:@{
+                       @"name": stopName,
+                       @"id": stopID,
+                       @"direction": journeyDirection
+                       }];
+    [defaults setObject:stops forKey:@"stops"];
+    [defaults synchronize];
+}
+
+- (void)removeStopFromDefaultsWithIndex:(NSInteger)index {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *stops    = [[defaults arrayForKey:@"stops"] mutableCopy];
+    [stops removeObjectAtIndex:index];
+    [defaults setObject:stops forKey:@"stops"];
+    [defaults synchronize];
 }
 
 #pragma mark - UIPageViewControllerDataSource
@@ -136,16 +167,9 @@
     self.removeStopButton.enabled = YES;
     
     // Write to persistent storage
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *stops = [[defaults arrayForKey:@"stops"] mutableCopy];
-    if (!stops) stops = [[NSMutableArray alloc] init];
-    [stops addObject:@{
-                        @"name": stopName,
-                        @"id": @(stopID),
-                        @"direction": @(journeyDirection)
-                       }];
-    [defaults setObject:stops forKey:@"stops"];
-    [defaults synchronize];
+    [self addStopToDefaultsWithName:stopName
+                              andID:@(stopID)
+                       andDirection:@(journeyDirection)];
 }
 
 #pragma mark - Actions
@@ -171,18 +195,16 @@
         }
         
         // Write to persistent storage
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSMutableArray *stops = [[defaults arrayForKey:@"stops"] mutableCopy];
-        [stops removeObjectAtIndex:index];
-        [defaults setObject:stops forKey:@"stops"];
-        [defaults synchronize];
+        [self removeStopFromDefaultsWithIndex:index];
     }];
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Avbryt" style:UIAlertActionStyleCancel handler:nil];
     
     [confirmController addAction:actionCancel];
     [confirmController addAction:actionConfirm];
     
-    [self presentViewController:confirmController animated:YES completion:nil];
+    [self presentViewController:confirmController
+                       animated:YES
+                     completion:nil];
 }
 
 @end

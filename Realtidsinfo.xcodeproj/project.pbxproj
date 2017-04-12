@@ -206,11 +206,11 @@
 				ABBF05FA1E9390E700B5FA74 /* ConfigureStopView.m */,
 				ABE73DD01E8C08A400C70E13 /* SearchStopsView.h */,
 				ABE73DD11E8C08A400C70E13 /* SearchStopsView.m */,
-				ABC01CC81E9D603900305877 /* Supporting Views */,
 				AB9B5C4D1E60C0B800BC51AE /* LaunchScreen.storyboard */,
 				AB9B5C501E60C0B800BC51AE /* Info.plist */,
 				AB9B5C4B1E60C0B800BC51AE /* Assets.xcassets */,
 				AB5FBA721E647A83009ACA2F /* Model */,
+				ABC01CC81E9D603900305877 /* Supporting Views */,
 				AB9B5C3F1E60C0B700BC51AE /* Supporting Files */,
 			);
 			path = Realtidsinfo;
