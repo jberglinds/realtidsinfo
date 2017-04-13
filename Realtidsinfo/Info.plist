@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHomeKitUsageDescription</key>
+	<string>Your HomeKit configuration is used to sync lights to departures.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is used to find nearby stops.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>

@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -81,7 +82,78 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pi9-vH-wIg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1916" y="-783"/>
+            <point key="canvasLocation" x="664" y="-480"/>
+        </scene>
+        <!--Configure Lights View-->
+        <scene sceneID="1fm-yP-TTD">
+            <objects>
+                <tableViewController id="TI1-vS-twL" customClass="ConfigureLightsView" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="obM-W3-DoK">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="620"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="killSwitchCell" textLabel="s0W-YZ-UMv" detailTextLabel="vjr-RG-h8d" style="IBUITableViewCellStyleValue1" id="jRd-qL-g9e">
+                                <rect key="frame" x="0.0" y="55.5" width="400" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jRd-qL-g9e" id="LE5-HS-mLK">
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Activated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s0W-YZ-UMv">
+                                            <rect key="frame" x="15" y="12" width="72" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="UISwitch" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vjr-RG-h8d">
+                                            <rect key="frame" x="317" y="12" width="68" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="lightCell" textLabel="5Rv-sG-MWd" detailTextLabel="Qcf-oJ-JfF" style="IBUITableViewCellStyleSubtitle" id="fPw-Fy-icT">
+                                <rect key="frame" x="0.0" y="99.5" width="400" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fPw-Fy-icT" id="E7P-yG-V7X">
+                                    <rect key="frame" x="0.0" y="0.0" width="361" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Light name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Rv-sG-MWd">
+                                            <rect key="frame" x="15" y="5" width="85.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Room name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qcf-oJ-JfF">
+                                            <rect key="frame" x="15" y="25.5" width="67" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="TI1-vS-twL" id="Udr-mx-ATL"/>
+                            <outlet property="delegate" destination="TI1-vS-twL" id="MQh-Mb-Ry7"/>
+                        </connections>
+                    </tableView>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="400" height="620"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1MQ-H6-0Ff" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-139" y="-762"/>
         </scene>
         <!--Main View-->
         <scene sceneID="F8m-ep-YQZ">
@@ -116,12 +188,22 @@
                                 <action selector="removeButtonPressed:" destination="6LA-7r-Oqu" id="JKw-ZI-1kQ"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="es9-pl-TcL">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <segue destination="Q3s-lS-Ab9" kind="presentation" identifier="addNewStopSegue" modalPresentationStyle="formSheet" id="zm5-s7-Gxi"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="es9-pl-TcL">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="Q3s-lS-Ab9" kind="presentation" identifier="addNewStopSegue" modalPresentationStyle="formSheet" id="zm5-s7-Gxi"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Lights" id="p2j-8I-8Fs">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <segue destination="TI1-vS-twL" kind="popoverPresentation" popoverAnchorBarButtonItem="p2j-8I-8Fs" id="W2z-m1-nAm">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="removeStopButton" destination="moN-xj-PO7" id="2qm-kQ-dI2"/>
@@ -129,7 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGp-JL-XCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="267" y="-157"/>
+            <point key="canvasLocation" x="-322" y="-157"/>
         </scene>
         <!--Realtime Page View Controller-->
         <scene sceneID="wiz-l0-4s5">
@@ -139,7 +221,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NL2-df-2lb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-290" y="796"/>
+            <point key="canvasLocation" x="-653" y="554"/>
         </scene>
         <!--Realtime Stop View-->
         <scene sceneID="tne-QT-ifu">
@@ -178,7 +260,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXe-Gg-DIR">
-                                <rect key="frame" x="80" y="318.5" width="864" height="131.5"/>
+                                <rect key="frame" x="80" y="319" width="864" height="131.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 minuter och 42 sekunder " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vv1-u6-Krm">
                                         <rect key="frame" x="10" y="25" width="844" height="76.5"/>
@@ -196,7 +278,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uppdaterad för 17 sekunder sedan" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zpe-Hd-MXP">
-                                <rect key="frame" x="338.5" y="470" width="347" height="29"/>
+                                <rect key="frame" x="339" y="470.5" width="347" height="29"/>
                                 <fontDescription key="fontDescription" name="SanFranciscoDisplay-Light" family="San Francisco Display" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -224,7 +306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="865" y="796"/>
+            <point key="canvasLocation" x="9" y="554"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YyT-mW-X7p">
@@ -261,7 +343,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vNE-nl-ngQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1262" y="-783"/>
+            <point key="canvasLocation" x="287" y="-479"/>
         </scene>
         <!--Hållplats-->
         <scene sceneID="v43-id-yvq">
@@ -336,7 +418,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EhM-Ak-6I3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="yeP-NW-nn4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2589" y="-783"/>
+            <point key="canvasLocation" x="1047" y="-479"/>
         </scene>
     </scenes>
     <resources>

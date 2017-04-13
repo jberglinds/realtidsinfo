@@ -27,6 +27,8 @@
 		ABBDD3FB1E66F60E0077B07C /* SanFranciscoDisplay-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB4EEF761E66F1BF00E297AF /* SanFranciscoDisplay-Light.otf */; };
 		ABBF05F81E938F4700B5FA74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABBF05F71E938F4700B5FA74 /* MapKit.framework */; };
 		ABBF05FB1E9390E700B5FA74 /* ConfigureStopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBF05FA1E9390E700B5FA74 /* ConfigureStopView.m */; };
+		ABC01CCB1E9F69B200305877 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC01CCA1E9F69B200305877 /* HomeKit.framework */; };
+		ABC01CCE1E9F857E00305877 /* ConfigureLightsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC01CCD1E9F857E00305877 /* ConfigureLightsView.m */; };
 		ABE5614F1E9D09B500891698 /* Departure.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE5614E1E9D09B500891698 /* Departure.m */; };
 		ABE73DD21E8C08A400C70E13 /* SearchStopsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD11E8C08A400C70E13 /* SearchStopsView.m */; };
 		ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */; };
@@ -92,6 +94,10 @@
 		ABBF05F71E938F4700B5FA74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		ABBF05F91E9390E700B5FA74 /* ConfigureStopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureStopView.h; sourceTree = "<group>"; };
 		ABBF05FA1E9390E700B5FA74 /* ConfigureStopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureStopView.m; sourceTree = "<group>"; };
+		ABC01CC91E9F69B200305877 /* Realtidsinfo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Realtidsinfo.entitlements; sourceTree = "<group>"; };
+		ABC01CCA1E9F69B200305877 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
+		ABC01CCC1E9F857E00305877 /* ConfigureLightsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureLightsView.h; sourceTree = "<group>"; };
+		ABC01CCD1E9F857E00305877 /* ConfigureLightsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureLightsView.m; sourceTree = "<group>"; };
 		ABE5614D1E9D09B500891698 /* Departure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Departure.h; path = Model/Departure.h; sourceTree = "<group>"; };
 		ABE5614E1E9D09B500891698 /* Departure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Departure.m; path = Model/Departure.m; sourceTree = "<group>"; };
 		ABE73DD01E8C08A400C70E13 /* SearchStopsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchStopsView.h; sourceTree = "<group>"; };
@@ -107,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABC01CCB1E9F69B200305877 /* HomeKit.framework in Frameworks */,
 				ABBF05F81E938F4700B5FA74 /* MapKit.framework in Frameworks */,
 				8E5311B4BA04EF1B3188403C /* libPods-Realtidsinfo.a in Frameworks */,
 			);
@@ -147,6 +154,7 @@
 		9B933F1AA13971E1198E9DC6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ABC01CCA1E9F69B200305877 /* HomeKit.framework */,
 				ABBF05F71E938F4700B5FA74 /* MapKit.framework */,
 				ABE73DD61E8D361600C70E13 /* CoreLocation.framework */,
 				6E73218B4BDAA647A736F907 /* libPods-Realtidsinfo.a */,
@@ -197,9 +205,12 @@
 		AB9B5C3E1E60C0B700BC51AE /* Realtidsinfo */ = {
 			isa = PBXGroup;
 			children = (
+				ABC01CC91E9F69B200305877 /* Realtidsinfo.entitlements */,
 				AB9B5C481E60C0B800BC51AE /* Main.storyboard */,
 				AB85C8EE1E6B264100D9181E /* MainView.h */,
 				AB85C8EF1E6B264100D9181E /* MainView.m */,
+				ABC01CCC1E9F857E00305877 /* ConfigureLightsView.h */,
+				ABC01CCD1E9F857E00305877 /* ConfigureLightsView.m */,
 				AB9B5C451E60C0B800BC51AE /* RealtimeStopView.h */,
 				AB9B5C461E60C0B800BC51AE /* RealtimeStopView.m */,
 				ABBF05F91E9390E700B5FA74 /* ConfigureStopView.h */,
@@ -336,6 +347,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = RVSA2Z4HRJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.HomeKit = {
+								enabled = 1;
+							};
+						};
 					};
 					AB9B5C541E60C0B800BC51AE = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -545,6 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB85C8F01E6B264100D9181E /* MainView.m in Sources */,
+				ABC01CCE1E9F857E00305877 /* ConfigureLightsView.m in Sources */,
 				AB7690241E92E8D300916024 /* LeftAndRightTableViewCell.m in Sources */,
 				AB9B5C471E60C0B800BC51AE /* RealtimeStopView.m in Sources */,
 				ABE73DD21E8C08A400C70E13 /* SearchStopsView.m in Sources */,
@@ -705,6 +722,7 @@
 			baseConfigurationReference = 8BAA52A2D789DB53258ADBE1 /* Pods-Realtidsinfo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Realtidsinfo/Realtidsinfo.entitlements;
 				DEVELOPMENT_TEAM = RVSA2Z4HRJ;
 				INFOPLIST_FILE = Realtidsinfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -719,6 +737,7 @@
 			baseConfigurationReference = 9E355D4C8B35543C45D803E3 /* Pods-Realtidsinfo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Realtidsinfo/Realtidsinfo.entitlements;
 				DEVELOPMENT_TEAM = RVSA2Z4HRJ;
 				INFOPLIST_FILE = Realtidsinfo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
