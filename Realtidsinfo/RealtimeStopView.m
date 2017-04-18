@@ -10,6 +10,7 @@
 #import "RealtimeSite.h"
 #import "TrafiklabAPI.h"
 #import "Departure.h"
+#import "LightsController.h"
 
 @interface RealtimeStopView ()
 @property (strong, nonatomic) TrafiklabAPI *API;
@@ -22,6 +23,8 @@
 
 @property (strong, nonatomic) RealtimeSite *site;
 @property (strong, nonatomic) NSTimer *UIUpdateTimer;
+
+@property (strong, nonatomic) LightsController *lightsController;
 @end
 
 @implementation RealtimeStopView
@@ -40,6 +43,8 @@
     // Add border around countdown view, only for the looks.
     self.countdownView.layer.borderColor = UIColor.whiteColor.CGColor;
     self.countdownView.layer.borderWidth = 10;
+    
+    self.lightsController = [LightsController sharedInstance];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -48,6 +53,9 @@
 
 //TODO: Not sure if removing timers when disappearing is needed.
 - (void)viewWillDisappear:(BOOL)animated {
+    // Remove observing to avoid crash
+    [self.view removeObserver:self forKeyPath:@"backgroundColor"];
+    
     [self.site stopUpdates];
     [self.UIUpdateTimer invalidate];
     self.UIUpdateTimer = nil;
@@ -58,6 +66,9 @@
     [self.site startUpdates];
     self.UIUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateUI) userInfo:nil repeats:YES];
     [super viewWillAppear:animated];
+    
+    // Observe changes to background color to be able to change HomeKit lights accordingly
+    [self.view addObserver:self forKeyPath:@"backgroundColor" options:NSKeyValueObservingOptionOld context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,6 +156,14 @@
                                                         alpha:1.0];
         }
     }];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"backgroundColor"]) {
+        if (![self.view.backgroundColor isEqual:self.lightsController.currentColor]) {
+            [self.lightsController setLightsToColor:self.view.backgroundColor];
+        }
+    }
 }
 
 - (int)getMinutesFromInterval:(NSTimeInterval)interval {

@@ -29,6 +29,7 @@
 		ABBF05FB1E9390E700B5FA74 /* ConfigureStopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBF05FA1E9390E700B5FA74 /* ConfigureStopView.m */; };
 		ABC01CCB1E9F69B200305877 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC01CCA1E9F69B200305877 /* HomeKit.framework */; };
 		ABC01CCE1E9F857E00305877 /* ConfigureLightsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC01CCD1E9F857E00305877 /* ConfigureLightsView.m */; };
+		ABC01CD11EA374FE00305877 /* LightsController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC01CD01EA374FE00305877 /* LightsController.m */; };
 		ABE5614F1E9D09B500891698 /* Departure.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE5614E1E9D09B500891698 /* Departure.m */; };
 		ABE73DD21E8C08A400C70E13 /* SearchStopsView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD11E8C08A400C70E13 /* SearchStopsView.m */; };
 		ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE73DD41E8C351100C70E13 /* TrafiklabAPI.m */; };
@@ -98,6 +99,8 @@
 		ABC01CCA1E9F69B200305877 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		ABC01CCC1E9F857E00305877 /* ConfigureLightsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigureLightsView.h; sourceTree = "<group>"; };
 		ABC01CCD1E9F857E00305877 /* ConfigureLightsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigureLightsView.m; sourceTree = "<group>"; };
+		ABC01CCF1EA374FE00305877 /* LightsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LightsController.h; path = Model/LightsController.h; sourceTree = "<group>"; };
+		ABC01CD01EA374FE00305877 /* LightsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LightsController.m; path = Model/LightsController.m; sourceTree = "<group>"; };
 		ABE5614D1E9D09B500891698 /* Departure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Departure.h; path = Model/Departure.h; sourceTree = "<group>"; };
 		ABE5614E1E9D09B500891698 /* Departure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Departure.m; path = Model/Departure.m; sourceTree = "<group>"; };
 		ABE73DD01E8C08A400C70E13 /* SearchStopsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchStopsView.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 		AB5FBA721E647A83009ACA2F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ABC01CCF1EA374FE00305877 /* LightsController.h */,
+				ABC01CD01EA374FE00305877 /* LightsController.m */,
 				AB652B2A1E9946680059E24B /* StopInfo.h */,
 				AB652B2B1E9946680059E24B /* StopInfo.m */,
 				ABE73DD31E8C351100C70E13 /* TrafiklabAPI.h */,
@@ -564,6 +569,7 @@
 				ABC01CCE1E9F857E00305877 /* ConfigureLightsView.m in Sources */,
 				AB7690241E92E8D300916024 /* LeftAndRightTableViewCell.m in Sources */,
 				AB9B5C471E60C0B800BC51AE /* RealtimeStopView.m in Sources */,
+				ABC01CD11EA374FE00305877 /* LightsController.m in Sources */,
 				ABE73DD21E8C08A400C70E13 /* SearchStopsView.m in Sources */,
 				ABE73DD51E8C351100C70E13 /* TrafiklabAPI.m in Sources */,
 				AB652B2C1E9946680059E24B /* StopInfo.m in Sources */,

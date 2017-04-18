@@ -71,25 +71,35 @@
         [color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
         for (HMService *light in self.activatedLights) {
             for (HMCharacteristic *characteristic in light.characteristics) {
-                if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypePowerState]) {
-                    [characteristic writeValue:@YES completionHandler:^(NSError *error) {
-                        // Handle error
-                    }];
-                } else if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypeHue]) {
-                    [characteristic writeValue:@(hue*360.0) completionHandler:^(NSError *error) {
-                        // Handle error
-                    }];
-                } else if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypeSaturation]) {
-                    [characteristic writeValue:@(saturation*100.0) completionHandler:^(NSError *error) {
-                        // Handle error
-                    }];
-                } else if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypeBrightness]) {
-                    [characteristic writeValue:@(self.brightness) completionHandler:^(NSError *error) {
-                        // Handle error
-                    }];
+                // If brightness is zero = black color = turn off lights
+                if (brightness) {
+                    if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypePowerState]) {
+                        [characteristic writeValue:@YES completionHandler:^(NSError *error) {
+                            // Handle error
+                        }];
+                    } else if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypeHue]) {
+                        [characteristic writeValue:@(hue*360.0) completionHandler:^(NSError *error) {
+                            // Handle error
+                        }];
+                    } else if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypeSaturation]) {
+                        [characteristic writeValue:@(saturation*100.0) completionHandler:^(NSError *error) {
+                            // Handle error
+                        }];
+                    } else if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypeBrightness]) {
+                        [characteristic writeValue:@(self.brightness) completionHandler:^(NSError *error) {
+                            // Handle error
+                        }];
+                    }
+                } else {
+                    if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypeBrightness]) {
+                        [characteristic writeValue:@(0) completionHandler:^(NSError *error) {
+                            // Handle error
+                        }];
+                    }
                 }
             }
         }
+        self.currentColor = color;
     }
 }
 

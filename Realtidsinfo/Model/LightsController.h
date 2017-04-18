@@ -14,6 +14,7 @@
 @property (nonatomic) BOOL activated;
 @property (strong, nonatomic, readonly) NSArray *lights; // of HMService
 @property (strong, nonatomic, readonly) NSMutableSet *activatedLights; // of HMService
+@property (strong, nonatomic) UIColor *currentColor;
 @property (nonatomic) NSInteger brightness;
 
 + (LightsController *)sharedInstance;
