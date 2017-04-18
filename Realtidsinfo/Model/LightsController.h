@@ -16,6 +16,7 @@
 @property (strong, nonatomic, readonly) NSMutableSet *activatedLights; // of HMService
 @property (nonatomic) NSInteger brightness;
 
++ (LightsController *)sharedInstance;
 - (void)activateLight:(HMService *)light;
 - (void)deactivateLight:(HMService *)light;
 - (void)setLightsToColor:(UIColor *)color;

@@ -198,7 +198,7 @@
                             <barButtonItem title="Lights" id="p2j-8I-8Fs">
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="TI1-vS-twL" kind="popoverPresentation" popoverAnchorBarButtonItem="p2j-8I-8Fs" id="W2z-m1-nAm">
+                                    <segue destination="TI1-vS-twL" kind="popoverPresentation" identifier="configureLights" popoverAnchorBarButtonItem="p2j-8I-8Fs" id="W2z-m1-nAm">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>

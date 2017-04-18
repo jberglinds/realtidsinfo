@@ -7,21 +7,27 @@
 //
 
 #import "ConfigureLightsView.h"
+#import "LightsController.h"
 
 @interface ConfigureLightsView ()
-
+@property (strong, nonatomic) LightsController *lightsController;
 @end
 
 @implementation ConfigureLightsView
 
+#pragma mark - UIViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.lightsController = [LightsController sharedInstance];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // Observe changes to available lights in order to update table with them
+    [self.lightsController addObserver:self forKeyPath:@"lights" options:0 context:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    // Remove observer before deallocating to avoid crash
+    [self.lightsController removeObserver:self forKeyPath:@"lights"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,20 +35,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+#pragma mark -
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"lights"]) {
+        [self.tableView reloadData];
+    }
+}
 
-
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     if (section == 0) {
         return 1;
     } else {
-        return 2;
+        return [self.lightsController.lights count];
     }
 }
 
@@ -70,48 +79,38 @@
         cell.textLabel.text = @"Aktiverad";
         cell.detailTextLabel.text = @"";
         UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
+        switchview.on = self.lightsController.activated;
+        [switchview addTarget:self action:@selector(switchWasToggled:) forControlEvents:UIControlEventValueChanged];
         cell.accessoryView = switchview;
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"lightCell" forIndexPath:indexPath];
+        HMService *light = self.lightsController.lights[indexPath.row];
+        cell.textLabel.text = light.name;
+        if ([self.lightsController.activatedLights containsObject:light]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)switchWasToggled:(UISwitch *)sender {
+    self.lightsController.activated = sender.on;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1) {
+        HMService *light = self.lightsController.lights[indexPath.row];
+        if ([self.lightsController.activatedLights containsObject:light]) {
+            [self.lightsController deactivateLight:light];
+        } else {
+            [self.lightsController activateLight:light];
+        }
+        [self.tableView reloadData];
+    }
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

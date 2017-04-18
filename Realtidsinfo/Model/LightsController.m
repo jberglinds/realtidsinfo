@@ -17,6 +17,17 @@
 
 @implementation LightsController
 
+#pragma mark - Singleton
++ (LightsController *)sharedInstance {
+    static LightsController *_sharedInstance = nil;
+    
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        _sharedInstance = [[LightsController alloc] init];
+    });
+    return _sharedInstance;
+}
+
 #pragma mark - Initialization
 - (instancetype)init {
     self = [super init];
