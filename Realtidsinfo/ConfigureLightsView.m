@@ -86,6 +86,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"lightCell" forIndexPath:indexPath];
         HMService *light = self.lightsController.lights[indexPath.row];
         cell.textLabel.text = light.name;
+        cell.detailTextLabel.text = light.accessory.room.name;
         if ([self.lightsController.activatedLights containsObject:light]) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
