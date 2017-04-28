@@ -39,6 +39,15 @@
     return self;
 }
 
+- (void)setActivated:(BOOL)activated {
+    if (activated) {
+        [self setLightsToColor:self.currentColor];
+    } else {
+        self.currentColor = nil;
+    }
+    _activated = activated;
+}
+
 - (NSMutableSet *)activatedLights {
     if (!_activatedLights) _activatedLights = [[NSMutableSet alloc] init];
     return _activatedLights;
@@ -59,6 +68,7 @@
 #pragma mark -
 - (void)activateLight:(HMService *)light {
     [self.activatedLights addObject:light];
+    [self setLightsToColor:self.currentColor];
 }
 
 - (void)deactivateLight:(HMService *)light {
@@ -66,7 +76,7 @@
 }
 
 - (void)setLightsToColor:(UIColor *)color {
-    if (self.activated) {
+    if (self.activated && color) {
         CGFloat hue, saturation, brightness, alpha;
         [color getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
         for (HMService *light in self.activatedLights) {
@@ -91,8 +101,8 @@
                         }];
                     }
                 } else {
-                    if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypeBrightness]) {
-                        [characteristic writeValue:@(0) completionHandler:^(NSError *error) {
+                    if ([characteristic.characteristicType isEqualToString:HMCharacteristicTypePowerState]) {
+                        [characteristic writeValue:@NO completionHandler:^(NSError *error) {
                             // Handle error
                         }];
                     }

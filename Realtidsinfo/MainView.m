@@ -70,8 +70,7 @@
 #pragma mark - NSUserDefaults
 - (void)loadStopsFromDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    for (NSDictionary *stop in [defaults objectForKey:@"stops"]) {
+    for (NSDictionary *stop in [defaults arrayForKey:@"stops"]) {
         RealtimeStopView *stopVC = [self.storyboard instantiateViewControllerWithIdentifier:@"RealtimeStopView"];
         stopVC.locationName     = stop[@"name"];
         stopVC.stopID           = [stop[@"id"] integerValue];
