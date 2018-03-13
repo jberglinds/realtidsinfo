@@ -61,6 +61,9 @@
     [self.UIUpdateTimer invalidate];
     self.UIUpdateTimer = nil;
     [super viewWillDisappear:animated];
+
+    // Always allow sleeping when view disappears
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -135,6 +138,9 @@
         int minutesLeft = [self getMinutesFromInterval:timeLeft];
         int secondsLeft = [self getSecondsFromInterval:timeLeft];
 
+        // Whether to disable going into sleep mode or not
+        BOOL disableSleepMode = YES;
+
         if (minutesLeft <= 0) {
             // Pulsate
             if ((secondsLeft % 2) != 0) {
@@ -170,7 +176,10 @@
                                                         green:0.5541
                                                          blue:0.8847
                                                         alpha:1.0];
+            // Allow sleeping when blue since it's a long time left to departure
+            disableSleepMode = NO;
         }
+        [UIApplication sharedApplication].idleTimerDisabled = disableSleepMode;
     }
                      completion:nil];
 }
