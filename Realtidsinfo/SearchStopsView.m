@@ -127,7 +127,7 @@
                 info.stopID    = [stop[@"SiteId"] integerValue];
                 info.stopName  = splitted[0];
                 info.areaName  = splitted[1];
-                info.latitude  = [latitude floatValue],
+                info.latitude  = [latitude floatValue];
                 info.longitude = [longitude floatValue];
 
                 [results addObject:info];

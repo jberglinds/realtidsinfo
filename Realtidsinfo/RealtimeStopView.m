@@ -42,7 +42,8 @@
     
     // Add border around countdown view, only for the looks.
     self.countdownView.layer.borderColor = UIColor.whiteColor.CGColor;
-    self.countdownView.layer.borderWidth = 10;
+    self.countdownView.layer.cornerRadius = 10;
+    self.countdownView.layer.borderWidth = 5;
     
     self.lightsController = [LightsController sharedInstance];
 }
@@ -96,7 +97,7 @@
 
     if (nextDeparture) {
         self.locationLabel.text = nextDeparture.stopArea;
-        self.busLabel.text      = [NSString stringWithFormat:@"%@ mot %@", nextDeparture.line, nextDeparture.destination];
+        self.busLabel.text      = [NSString stringWithFormat:@"Buss %@ mot %@", nextDeparture.line, nextDeparture.destination];
 
         double timeLeft = [nextDeparture.expectedAt timeIntervalSinceNow];
 
@@ -128,6 +129,8 @@
 // Set different background colors for view depending on time left to departure
 - (void)updateBackgroundToTimeLeft:(NSTimeInterval)timeLeft {
     [UIView animateWithDuration:0.9f
+                          delay:0
+                        options:UIViewAnimationOptionAllowUserInteraction
                      animations:^{
         int minutesLeft = [self getMinutesFromInterval:timeLeft];
         int secondsLeft = [self getSecondsFromInterval:timeLeft];
@@ -136,34 +139,40 @@
             // Pulsate
             if ((secondsLeft % 2) != 0) {
                 self.view.backgroundColor = [UIColor colorWithRed:1.0
-                                                            green:0.0145
-                                                             blue:0.0
+                                                            green:0.2958
+                                                             blue:0.25
                                                             alpha:1.0];
+
             } else {
-                self.view.backgroundColor = [UIColor blackColor];
+                self.view.backgroundColor = [UIColor whiteColor];
             }
         } else if (minutesLeft <= 2) {
+            // Red
             self.view.backgroundColor = [UIColor colorWithRed:1.0
-                                                        green:0.0145
-                                                         blue:0.0
+                                                        green:0.2958
+                                                         blue:0.25
                                                         alpha:1.0];
         } else if (minutesLeft <= 5) {
+            // Orange
             self.view.backgroundColor = [UIColor colorWithRed:1.0
-                                                        green:0.6372
-                                                         blue:0.0
+                                                        green:0.7603
+                                                         blue:0.3005
                                                         alpha:1.0];
         } else if (minutesLeft <= 10) {
+            // Green
             self.view.backgroundColor = [UIColor colorWithRed:0.0
-                                                        green:0.877
-                                                         blue:0.2838
+                                                        green:0.8286
+                                                         blue:0.3972
                                                         alpha:1.0];
         } else {
+            // Blue
             self.view.backgroundColor = [UIColor colorWithRed:0.0
-                                                        green:0.46
-                                                         blue:1.0
+                                                        green:0.5541
+                                                         blue:0.8847
                                                         alpha:1.0];
         }
-    }];
+    }
+                     completion:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
