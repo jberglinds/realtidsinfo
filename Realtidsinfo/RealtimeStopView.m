@@ -101,7 +101,15 @@
         double timeLeft = [nextDeparture.expectedAt timeIntervalSinceNow];
 
         if (timeLeft > 0) {
-            self.countdownLabel.text = [NSString stringWithFormat:@"%d minuter och %d sekunder", [self getMinutesFromInterval:timeLeft], [self getSecondsFromInterval:timeLeft]];
+            int minutes = [self getMinutesFromInterval:timeLeft];
+            NSString *minutesString = minutes == 1 ? @"minut" : @"minuter";
+            int seconds = [self getSecondsFromInterval:timeLeft];
+            NSString *secondsString = seconds == 1 ? @"sekund" : @"sekunder";
+            if (minutes == 0) {
+                self.countdownLabel.text = [NSString stringWithFormat:@"%d %@", seconds, secondsString];
+            } else {
+                self.countdownLabel.text = [NSString stringWithFormat:@"%d %@ och %d %@", minutes, minutesString, seconds, secondsString];
+            }
         } else {
             self.countdownLabel.text = @"Nu";
         }
